@@ -12,6 +12,9 @@ module.exports = {
       "fluorescent-blue": "#26EFE9",
       "waterspout": "#A8F9F6",
       "midnight-blue": "#000048",
+    },
+    fontFamily:{
+      gellix: ["Gellix", "sans-serif"],
     }
   },
   plugins: [],
