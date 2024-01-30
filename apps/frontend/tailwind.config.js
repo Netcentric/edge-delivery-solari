@@ -4,7 +4,22 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '5px': '5px',
+        '15px': '15px',
+        '9px': '9px',
+        '25px': '25px',
+        '31.25px': '31.25px',
+        '18.75px': '18.75px',
+      },
+      lineHeight: {
+        '25px': '25px',
+      },
+      fontSize: {
+        '25px': '25px',
+      },
+    },
     colors: {
       black: colors.black,
       white: colors.white,
@@ -13,10 +28,11 @@ module.exports = {
       waterspout: '#A8F9F6',
       'midnight-blue': '#000048',
       'dark-teal': '#11C7CC',
-      'medium-teal': '#26EFE9',
-      'light-teal': 'C9FBFA',
+      'medium-teal': '#29EEE9',
+      'light-teal': '#A8F9F6',
+      'lightest-teal': '#C9FBFA',
       'disabled-teal': '#26EFE9',
-      'medium-blue': '#2F78C4',
+      'link-blue': '#2F78C4',
     },
     fontFamily: {
       gellix: ['Gellix', 'sans-serif'],
