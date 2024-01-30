@@ -18,6 +18,9 @@ module.exports = {
       'disabled-teal': '#26EFE9',
       'medium-blue': '#2F78C4',
     },
+    fontFamily: {
+      gellix: ['Gellix', 'sans-serif'],
+    },
   },
   plugins: [],
 };
