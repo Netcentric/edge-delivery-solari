@@ -40,3 +40,34 @@
     transform: rotate(360deg);
   }
 }
+
+// Fonts
+$gellix-font-family: "Gellix";
+$gellix-fonts-path: "./stories/assets/fonts/";
+$font-weight-thin: 100;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+@font-face {
+  font-family: $gellix-font-family;
+  src: url("./stories/assets/fonts/Gellix-Light_R.woff2") format("woff2");
+  font-weight: $font-weight-light;
+}
+
+@font-face {
+  font-family: $gellix-font-family;
+  src: url("./stories/assets/fonts/Gellix-Regular_R.woff2") format("woff2");
+  font-weight: $font-weight-regular;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: $gellix-font-family;
+  src: url("./stories/assets/fonts/Gellix-SemiBold_R.woff2") format("woff2");
+  font-weight: $font-weight-semibold;
+  font-style: normal;
+}
