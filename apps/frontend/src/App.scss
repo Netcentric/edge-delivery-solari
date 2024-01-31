@@ -71,15 +71,3 @@ $font-weight-black: 900;
   font-weight: $font-weight-semibold;
   font-style: normal;
 }
-
-// BUTTON STYLES
-.btn-secondary {
-  &:hover {
-    svg path {
-      fill: theme('colors.midnight-blue');
-    }
-  }
-  svg path {
-    fill: theme('colors.link-blue');
-  }
-}

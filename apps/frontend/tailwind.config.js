@@ -6,18 +6,7 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        '5px': '5px',
-        '15px': '15px',
-        '9px': '9px',
-        '25px': '25px',
-        '31.25px': '31.25px',
-        '18.75px': '18.75px',
-      },
-      lineHeight: {
-        '25px': '25px',
-      },
-      fontSize: {
-        '25px': '25px',
+        4.5: '1.125rem', //18px
       },
     },
     colors: {

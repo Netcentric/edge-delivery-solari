@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '../components/Button';
+import { Button } from './Button';
 
 const meta = {
   title: 'Button',
@@ -19,6 +19,7 @@ export const PrimaryDefault: Story = {
   args: {
     label: 'Button',
     variant: 'primary',
+    iconRight: 'ArrowRightBold',
   },
 };
 

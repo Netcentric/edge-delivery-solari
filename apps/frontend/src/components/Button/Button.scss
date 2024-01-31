@@ -1,0 +1,10 @@
+.btn-secondary {
+  &:hover {
+    svg path {
+      fill: theme('colors.midnight-blue');
+    }
+  }
+  svg path {
+    fill: theme('colors.link-blue');
+  }
+}
