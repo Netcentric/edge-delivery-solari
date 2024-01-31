@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+svg {
+  fill: currentColor;
+}
+
 .App {
   text-align: center;
 }

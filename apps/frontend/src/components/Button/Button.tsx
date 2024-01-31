@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import './Button.scss';
 import { ReactComponent as ArrowRightBoldSVG } from '../../assets/icons/arrow-right-bold.svg';
 
 const IconComponents = {
