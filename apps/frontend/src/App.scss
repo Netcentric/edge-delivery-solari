@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+svg {
+  fill: currentColor;
+}
+
 .App {
   text-align: center;
 }
@@ -42,8 +46,8 @@
 }
 
 // Fonts
-$gellix-font-family: "Gellix";
-$gellix-fonts-path: "./stories/assets/fonts/";
+$gellix-font-family: 'Gellix';
+$gellix-fonts-path: './assets/fonts/';
 $font-weight-thin: 100;
 $font-weight-light: 300;
 $font-weight-regular: 400;
@@ -54,20 +58,20 @@ $font-weight-black: 900;
 
 @font-face {
   font-family: $gellix-font-family;
-  src: url("./stories/assets/fonts/Gellix-Light_R.woff2") format("woff2");
+  src: url('./assets/fonts/Gellix-Light_R.woff2') format('woff2');
   font-weight: $font-weight-light;
 }
 
 @font-face {
   font-family: $gellix-font-family;
-  src: url("./stories/assets/fonts/Gellix-Regular_R.woff2") format("woff2");
+  src: url('./assets/fonts/Gellix-Regular_R.woff2') format('woff2');
   font-weight: $font-weight-regular;
   font-style: normal;
 }
 
 @font-face {
   font-family: $gellix-font-family;
-  src: url("./stories/assets/fonts/Gellix-SemiBold_R.woff2") format("woff2");
+  src: url('./assets/fonts/Gellix-SemiBold_R.woff2') format('woff2');
   font-weight: $font-weight-semibold;
   font-style: normal;
 }
