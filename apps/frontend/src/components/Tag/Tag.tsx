@@ -1,5 +1,5 @@
 import React from 'react';
-import vector from '../../assets/icons/vector.svg';
+import cross from '../../assets/icons/cross.svg';
 import clsx from 'clsx';
 
 interface TagProps {
@@ -24,7 +24,7 @@ export const Tag = ({ label, isSelected, onClick }: TagProps) => {
         'text-midnight-blue border-midnight-blue hover:bg-midnight-blue hover:text-white': selected === false
     })} onClick={handleClick}>
       {label}
-      {selected && <img className='pl-[1.125rem] pt-[0.313rem]' src={vector} alt="cancel" />}
+      {selected && <img className='pl-[1.125rem] pt-[0.313rem]' src={cross} alt="cancel" />}
     </button>
   );
 };
