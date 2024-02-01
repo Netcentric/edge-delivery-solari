@@ -40,7 +40,7 @@ export const Text = ({ size = 'default', weight = 'regular', children }: TextPro
     <p
       className={clsx(common, {
         'font-semibold': weight === 'bold',
-        'text-[1.25rem] leading-6': size === 'default',
+        'text-xl leading-6': size === 'default',
         'text-sm leading-5': size === 'small',
         'text-xs leading-4': size === 'tiny',
       })}
