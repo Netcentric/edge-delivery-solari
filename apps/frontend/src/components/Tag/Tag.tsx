@@ -10,7 +10,7 @@ interface TagProps {
 export const Tag = ({ label, isSelected }: TagProps) => {
     const [selected, setSelected] = React.useState<boolean>(isSelected || false);
 
-  const commonClasses = 'rounded-[2.5rem] font-gellix text-xl leading-5 p-[1.875rem]';
+  const commonClasses = 'rounded-[2.5rem] font-gellix font-semibold text-[1.25rem] leading-5 px-[1.875rem] py-[0.938rem] ';
 
   const handleClick = ()=> {
     setSelected(!selected);
