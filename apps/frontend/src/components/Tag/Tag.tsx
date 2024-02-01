@@ -10,7 +10,7 @@ interface TagProps {
 export const Tag = ({ label, isSelected }: TagProps) => {
     const [selected, setSelected] = React.useState<boolean>(isSelected || false);
 
-  const commonClasses = 'rounded-[2.5rem] font-gellix font-semibold text-[1.25rem] leading-5 px-[1.875rem] py-[0.938rem] ';
+  const commonClasses = 'rounded-[2.5rem] font-gellix font-semibold text-[1.25rem] leading-5 px-[1.875rem] py-[0.938rem] border ';
 
   const handleClick = ()=> {
     setSelected(!selected);
@@ -19,7 +19,7 @@ export const Tag = ({ label, isSelected }: TagProps) => {
   return (
     <div className={clsx(commonClasses,{
         'flex bg-midnight-blue text-white': selected === true,
-        'text-midnight-blue border border-midnight-blue hover:bg-midnight-blue hover:text-white': selected === false
+        'text-midnight-blue border-midnight-blue hover:bg-midnight-blue hover:text-white': selected === false
     })} onClick={handleClick}>
       {label}
       {selected && <img className='pl-[1.125rem]' src={vector} alt="logo" />}
