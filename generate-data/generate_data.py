@@ -9,8 +9,6 @@ from langchain.memory import ConversationBufferWindowMemory
 from langchain.llms import OpenAI
 from langchain.prompts.prompt import PromptTemplate
 
-from supabase import Client, create_client
-
 Logger = logging.getLogger()
 Logger.setLevel(logging.INFO)
 load_dotenv()
@@ -18,7 +16,9 @@ OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
 
 
 template = """You are an AI assistant responsible for generating creative content for a large database of futuristic spaceships to travel around the universe.
-Your task is to fill in missing information for a given record of a spaceship. There can be different combinations of travel purpose, ammenities the client will look for and capacity of the ship. You should provide information of both the looks of the spaceship and its technical characteristics.
+Your task is to fill in missing information for a given record of a spaceship. There can be different combinations of travel purpose, ammenities the client will look for and capacity of the ship. You should provide information of both the looks of the spaceship and its technical characteristics. When defining the size of the starship, consider that all the passengers must fit comfortably in it. You are given the passenger capacity, the purposes of the travel and the issues that are important for the user:
+{incomplete_starship}
+Use the provided record as a reference, but do not repeat the information that was given to you.
 As an example, consider this complete record: {{
         "baseModelName": "Harmony Starcruiser",
         "shortDescription": "Embark on a celestial journey with the Harmony Starcruiser, a small spacecraft designed for both leisure and interstellar collaboration. This compact vessel comfortably accommodates 2-5 passengers, fostering an atmosphere of camaraderie and shared exploration.",
@@ -31,65 +31,53 @@ As an example, consider this complete record: {{
         "weight": "50000 kilograms",
         "range": "100000 light-years",
         "cargoCapacity": "500 cubic meters",
-        "exterior": ["Customizable Hull Lights: Express individuality with customizable hull lights that not only add a touch of personal style but also contribute to the spacecraft's visibility in the vastness of space.", "Compact Form Factor: Designed for agility and easy maneuverability, the compact form factor of the Harmony Starcruiser ensures versatility in navigating both bustling spaceports and remote celestial destinations.", "Interstellar Collaboration Hub: Featuring collaborative docking stations and communication arrays, the spacecraft is equipped to facilitate interstellar partnerships and joint ventures, enhancing its functionality beyond leisure.", "Customizable Hull Lights: Express individuality with customizable hull lights that not only add a touch of personal style but also contribute to the spacecraft's visibility in the vastness of space.", "Compact Form Factor: Designed for agility and easy maneuverability, the compact form factor of the Harmony Starcruiser ensures versatility in navigating both bustling spaceports and remote celestial destinations."],
+        "exterior": ["Customizable Hull Lights: Express individuality with customizable hull lights that not only add a touch of personal style but also contribute to the spacecraft's visibility in the vastness of space.", 
+        "Compact Form Factor: Designed for agility and easy maneuverability, the compact form factor of the Harmony Starcruiser ensures versatility in navigating both bustling spaceports and remote celestial destinations.", 
+        "Interstellar Collaboration Hub: Featuring collaborative docking stations and communication arrays, the spacecraft is equipped to facilitate interstellar partnerships and joint ventures, enhancing its functionality beyond leisure."],
         "interior": "With plush seating, panoramic windows, and collaborative workspaces, the Harmony Starcruiser seamlessly blends relaxation and productivity, making it the ideal choice for those seeking leisure and interstellar teamwork amidst the vast wonders of space."
         }}
-Based on this, please provide suitable values for the missing fields in the following incomplete record:
-{incomplete_starship}
-Your answer should be only in JSON format."""
+Based on this, please provide only one suitable value for only the FIELDDESCRIPTION in JSON format.
+Your answer should be only FIELDNAME field in JSON format. This means, as if the answer was the content of JSON file. Remember that this means that the answer you provide MUST be between curly brackets."""
 
-prompt = PromptTemplate(input_variables=["incomplete_starship"], template=template)
 
-chatgpt_chain = LLMChain(
-    llm=OpenAI(temperature=0.5),
-    prompt=prompt,
-    verbose=True,
-    memory=ConversationBufferWindowMemory(k=2),
-    model="gpt-4"
-)
-print(chatgpt_chain)
 
-def lambda_handler(event, context):
-    incomplete_starship = event["body"]
+def lambda_handler(event, passengers, context):
+    list_fields=[["the name of the base model", "baseModelName"], ["short description of the starship", "shortDescription"], ["length of the ship in metres", "length"], ["width of the ship in metres", "width"], ["height of the ship in metres", "height"], ["weight of the ship in kilograms", "weight"], ["distance the starship can travel without refuelling in light-years", "range"], ["cargo capacity in cubic meters", "cargoCapacity"], ["different components of the exterior design of the starship, and their description", "exterior"], ["description of the interior of the starship cabin", "interior"]]
+    json_starship=json.loads(event["body"])
+    for item in list_fields:
+        incomplete_starship=json.dumps(json_starship)
+        template_field=template.replace("FIELDDESCRIPTION", item[0])
+        template_field=template.replace("FIELDNAME", item[1])
+        prompt = PromptTemplate(input_variables=["incomplete_starship"], template=template_field)
+        chatgpt_chain = LLMChain(
+            llm=OpenAI(temperature=0.5),
+            prompt=prompt,
+            verbose=True,
+            memory=ConversationBufferWindowMemory(k=2)
+        )
+        Logger.info(f"Checking starship: {incomplete_starship}")
+        result = chatgpt_chain.predict(
+            incomplete_starship=incomplete_starship
+        )
 
-    Logger.info(f"Checking starship: {incomplete_starship}")
-    result = chatgpt_chain.predict(
-        incomplete_starship=incomplete_starship,
-    )
-
-    print(f"Bot answer: {result}")
-    print(f"Last charachter: " + result[-1])
-    # if result[-1] != '}':
-    #     continue_result = openai.OpenAI.chat.completions.create(messages = "please continue", model="gpt-3.5-turbo")
-    # #     new_chain = LLMChain(
-    # #                         llm=OpenAI(temperature=0.5),
-    # #                         prompt=PromptTemplate(template="please continue"),
-    # #                         verbose=True,
-    # #                         memory=ConversationBufferWindowMemory(k=2),
-    # #                     )
-    # #     continue_result = new_chain.predict()
-    #     print(f"Bot continue answer: {continue_result}")
+        print(f"Bot answer: {result}")
+        json_starship[item[1]]=json.loads(result)[item[1]]
     
-    # with open('data.json', 'w') as f:
-    #     json.dump(result, f)
-
-    # parsedResult = json.loads(result)
-    # parsedResult.pop("name", None)
-    # parsedResult.pop("parentNames", None)
-    # parsedResult.pop("earthAnalog", None)
-    # supabase.table("space_locations").update(parsedResult).eq(
-    #     "id", parsedResult["id"]
-    # ).execute()
+    #Save the generated response in a json file
+    file_name = "data_" + passengers + ".json"
+    with open(file_name, 'w') as f:
+        json.dump(json_starship, f)
 
     return {"statusCode": 200, "body": result}
 
-# NOTE: For testing in local
-il = json.dumps(
-    {
-        "purposes": "scientific research",
-        "importantForUser": ["safety", "durability"],
-        "passengerCapacity": "10 to 15 people",
-    }
-)
-event = {"body": f"{il}"}
-lambda_handler(event, None)
+passenger_options = ["2 to 5 people", "6 to 12 people", "13 to 20 people", "21 to 50 people", "50 to 100 people", ]
+for passengers in passenger_options:
+    il = json.dumps(
+        {
+            "purposes": ["colonization", "scientific research"],
+            "importantForUser": ["safety", "durability"],
+            "passengerCapacity": passengers,
+        }
+    )
+    event = {"body": f"{il}"}
+    lambda_handler(event, passengers, None)
