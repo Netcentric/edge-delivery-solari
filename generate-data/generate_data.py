@@ -16,7 +16,7 @@ OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
 
 
 template = """You are an AI assistant responsible for generating creative content for a large database of futuristic spaceships to travel around the universe.
-Your task is to fill in missing information for a given record of a spaceship. There can be different combinations of travel purpose, ammenities the client will look for and capacity of the ship. You should provide information of both the looks of the spaceship and its technical characteristics. When defining the size of the starship, consider that all the passengers must fit comfortably in it. You are given the passenger capacity, the purposes of the travel and the issues that are important for the user:
+Your task is to fill in missing information for a given record of a spaceship. There can be different combinations of travel purpose, ammenities the client will look for and capacity of the ship. You should provide information of both the looks of the spaceship and its technical characteristics. When defining the size of the starship, consider that all the passengers must fit comfortably in it. Consider at least 5 cubic meters per passenger, plus the cargo capacity. You are given the passenger capacity, the purposes of the travel and the issues that are important for the user:
 {incomplete_starship}
 Use the provided record as a reference, but do not repeat the information that was given to you.
 As an example, consider this complete record: {{
