@@ -1,0 +1,20 @@
+{
+  "name": "solari2.0-poc",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc",
+    "run": "npm run compile && ./src/main/sh/run.sh"
+  },
+  "author": "andreas.haller@netcentric.biz",
+  "dependencies": {
+    "@adobe/helix-md2docx": "^2.1.33",
+    "@types/node": "^20.10.5",
+    "google-auth-library": "^9.4.1",
+    "googleapis": "^129.0.0",
+    "openai": "^4.24.1",
+    "typescript": "^5.3.3"
+  }
+}

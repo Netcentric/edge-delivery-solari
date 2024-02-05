@@ -1,0 +1,1 @@
+node "dist/ts/$1.js"

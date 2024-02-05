@@ -1,9 +1,10 @@
 # Your Project's Title...
 Your project's description...
 
+
 ## Environments
-- Preview: https://main--{repo}--{owner}.hlx.page/
-- Live: https://main--{repo}--{owner}.hlx.live/
+- Preview: https://main--edge-delivery-solari--netcentric.hlx.page/
+- Live: https://main--edge-delivery-solari--netcentric.hlx.live/
 
 ## Installation
 
@@ -18,6 +19,7 @@ npm run lint
 ```
 
 ## Local development
+### Use node 16 ;) 
 
 1. Create a new repository based on the `aem-boilerplate` template and add a mountpoint in the `fstab.yaml`
 1. Add the [AEM Code Sync GitHub App](https://github.com/apps/aem-code-sync) to the repository
