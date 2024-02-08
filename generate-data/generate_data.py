@@ -45,14 +45,13 @@ def document_features(document, new_name, result_replace, prompt_text):
         llm=OpenAI(temperature=0.5),
         prompt=prompt,
         verbose=True,
-        memory=ConversationBufferWindowMemory(k=2)
+        memory=ConversationBufferWindowMemory(k=5)
     )
     result = chatgpt_chain.predict(
         FEATURE=new_name
     )
     document = document.replace(result_replace, result)
-    return document, result
-    
+    return document, result  
 
 def get_features_data(this_ship_funcs_necs, shipfeatures_markdown_template, shipdescription_markdown_template):
     i = 1
@@ -60,7 +59,7 @@ def get_features_data(this_ship_funcs_necs, shipfeatures_markdown_template, ship
         shipfeatures_markdown_template = shipfeatures_markdown_template.replace("FEATURE" + str(i), item)
         shipfeatures_markdown_template, name_result = document_features(shipfeatures_markdown_template, item, "feature" + str(i) + "Name", "Please name one feature for {FEATURE} in a spaceship. Only name it, use maximum five words.")
         shipfeatures_markdown_template = shipfeatures_markdown_template.replace("feature" + str(i) + "Name", name_result)
-        shipdescription_markdown_template = shipdescription_markdown_template.replace("feature" + str(i) + "Name", name_result)
+        shipdescription_markdown_template = shipdescription_markdown_template.replace("#### feature" + str(i) + "Name", "#### " + name_result)
         shipdescription_markdown_template, _ = document_features(shipdescription_markdown_template, name_result, "feature" + str(i) + "Description", "Please provide a detailed description of {FEATURE} in a spaceship. It should be two to four lines long.")
         i=i+1
         
@@ -76,7 +75,7 @@ def lambda_handler(event, passengers, purposes, this_ship_funcs_necs, context):
     shipfeatures_markdown_template = shipfeatures_markdown_template.replace("PURPOSES", purposes)
     shipfeatures_markdown_template = shipfeatures_markdown_template.replace("minCrew", str(passengers[0]))
     shipfeatures_markdown_template = shipfeatures_markdown_template.replace("maxCrew", str(passengers[1]))
-    list_fields=[["the name of the starship, which should take into consideration the purposes selected in order not to give a generic name", "baseModelName"], ["short description of the vessel, including some main features of it", "shortDescription"], ["length of the ship both in metres and feet, with no decimals", "length"], ["width of the ship both in metres and feet, with no decimals", "width"], ["height of the ship both in metres and feet, with no decimals", "height"], ["weight of the ship in kilograms", "weight"], ["distance the starship can travel without refuelling in light-years", "range"], ["cargo capacity in cubic meters", "cargoCapacity"]]
+    list_fields=[["a cool name for the starship that has some relation to the purposes given, temperature 1.0 and frequency penalty 2.0,", "baseModelName"], ["short description of the vessel, including some main features of it", "shortDescription"], ["length of the ship both in metres and feet, with no decimals", "length"], ["width of the ship both in metres and feet, with no decimals", "width"], ["height of the ship both in metres and feet, with no decimals", "height"], ["weight of the ship in kilograms", "weight"], ["distance the starship can travel without refuelling in light-years", "range"], ["cargo capacity in cubic meters", "cargoCapacity"]]
     #short description of the starship based on all the information already provided, mentioning most of the data already known relative to the starhip
     json_starship=json.loads(event["body"])
     for item in list_fields:
