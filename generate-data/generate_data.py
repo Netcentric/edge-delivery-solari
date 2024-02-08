@@ -39,41 +39,44 @@ As an example, consider this complete record: {{
 Based on this, please provide only one suitable value for only the FIELDDESCRIPTION in JSON format.
 Your answer should be only FIELDNAME field in JSON format. This means, as if the answer was the content of JSON file. Remember that this means that the answer you provide MUST be between curly brackets."""
 
-def name_features(this_ship_funcs_necs):
-    with open('shipfeatures_markdown_template.md', 'r') as f:
-        shipfeatures_markdown_template = f.read()
-    i=1
-    for item in this_ship_funcs_necs:
-        FEATURE=item
-        to_replace = "FEATURE" + str(i)
-        shipfeatures_markdown_template = shipfeatures_markdown_template.replace(to_replace, FEATURE)
-        prompt = PromptTemplate(input_variables=["FEATURE"], template="Please name one feature for {FEATURE} in a spaceship. Only name it, use maximum five words")
-        chatgpt_chain = LLMChain(
-            llm=OpenAI(temperature=0.5),
-            prompt=prompt,
-            verbose=True,
-            memory=ConversationBufferWindowMemory(k=2)
-        )
-        result = chatgpt_chain.predict(
-            FEATURE=FEATURE
-        )
+def document_features(document, new_name, result_replace, prompt_text):
+    prompt = PromptTemplate(input_variables=["FEATURE"], template=prompt_text)
+    chatgpt_chain = LLMChain(
+        llm=OpenAI(temperature=0.5),
+        prompt=prompt,
+        verbose=True,
+        memory=ConversationBufferWindowMemory(k=2)
+    )
+    result = chatgpt_chain.predict(
+        FEATURE=new_name
+    )
+    document = document.replace(result_replace, result)
+    return document, result
+    
 
-        print(f"Bot answer: {result}")
-        description_to_replace = "feature" + str(i) +"Description"
-        shipfeatures_markdown_template = shipfeatures_markdown_template.replace(description_to_replace, result)
+def get_features_data(this_ship_funcs_necs, shipfeatures_markdown_template, shipdescription_markdown_template):
+    i = 1
+    for item in this_ship_funcs_necs:
+        shipfeatures_markdown_template = shipfeatures_markdown_template.replace("FEATURE" + str(i), item)
+        shipfeatures_markdown_template, name_result = document_features(shipfeatures_markdown_template, item, "feature" + str(i) + "Name", "Please name one feature for {FEATURE} in a spaceship. Only name it, use maximum five words.")
+        shipfeatures_markdown_template = shipfeatures_markdown_template.replace("feature" + str(i) + "Name", name_result)
+        shipdescription_markdown_template = shipdescription_markdown_template.replace("feature" + str(i) + "Name", name_result)
+        shipdescription_markdown_template, _ = document_features(shipdescription_markdown_template, name_result, "feature" + str(i) + "Description", "Please provide a detailed description of {FEATURE} in a spaceship. It should be two to four lines long.")
         i=i+1
         
-    return shipfeatures_markdown_template
+    return shipfeatures_markdown_template, shipdescription_markdown_template
 
 
 def lambda_handler(event, passengers, purposes, this_ship_funcs_necs, context):
     with open('shipfeatures_markdown_template.md', 'r') as f:
         shipfeatures_markdown_template = f.read()
-    shipfeatures_markdown_template = name_features(this_ship_funcs_necs)
+    with open('shipdescription_markdown_template.md', 'r') as f:
+        shipdescription_markdown_template = f.read()
+    shipfeatures_markdown_template, shipdescription_markdown_template = get_features_data(this_ship_funcs_necs, shipfeatures_markdown_template, shipdescription_markdown_template)
     shipfeatures_markdown_template = shipfeatures_markdown_template.replace("PURPOSES", purposes)
     shipfeatures_markdown_template = shipfeatures_markdown_template.replace("minCrew", str(passengers[0]))
     shipfeatures_markdown_template = shipfeatures_markdown_template.replace("maxCrew", str(passengers[1]))
-    list_fields=[["the name of the base model", "baseModelName"], ["short description of the vessel, including some main features of it", "shortDescription"], ["length of the ship both in metres and feet, with no decimals", "length"], ["width of the ship both in metres and feet, with no decimals", "width"], ["height of the ship both in metres and feet, with no decimals", "height"], ["weight of the ship in kilograms", "weight"], ["distance the starship can travel without refuelling in light-years", "range"], ["cargo capacity in cubic meters", "cargoCapacity"]]
+    list_fields=[["the name of the starship, which should take into consideration the purposes selected in order not to give a generic name", "baseModelName"], ["short description of the vessel, including some main features of it", "shortDescription"], ["length of the ship both in metres and feet, with no decimals", "length"], ["width of the ship both in metres and feet, with no decimals", "width"], ["height of the ship both in metres and feet, with no decimals", "height"], ["weight of the ship in kilograms", "weight"], ["distance the starship can travel without refuelling in light-years", "range"], ["cargo capacity in cubic meters", "cargoCapacity"]]
     #short description of the starship based on all the information already provided, mentioning most of the data already known relative to the starhip
     json_starship=json.loads(event["body"])
     for item in list_fields:
@@ -98,22 +101,29 @@ def lambda_handler(event, passengers, purposes, this_ship_funcs_necs, context):
     
     #Save the generated response in a json file
     ship_name = json_starship["baseModelName"]
+    shipdescription_markdown_template = shipdescription_markdown_template.replace("baseModelName", ship_name)
+    shipdescription_markdown_template, _ = document_features(shipdescription_markdown_template, shipfeatures_markdown_template, "longDescription", "Please provide a detailed description based on the data contained {FEATURE} in a spaceship. The description should cover all of the features information in it, and it should be exactly two paragraphs long.")
+    shipdescription_markdown_template, _ = document_features(shipdescription_markdown_template, ship_name, "interiorDescription", "Please provide a detailed description of the interior (rooms, design...) of the spaceship {FEATURE} considering the information from the previous prompts. The description should be exactly two paragraphs long.")
     passengers_str = json_starship["passengerCapacity"]
     json_file_name = "./starship_data/json/" + ship_name + " " + passengers_str + ".json"
-    md_file_name = "./starship_data/markdown/" + ship_name + " " + passengers_str + ".md"
+    md_features_file_name = "./starship_data/markdown/" + ship_name + " " + passengers_str + " features.md"
+    md_description_file_name = "./starship_data/markdown/" + ship_name + " " + passengers_str + " description.md"
     
     with open(json_file_name, 'w') as f:
         json.dump(json_starship, f)
     
-    with open(md_file_name, 'w') as f:
+    with open(md_features_file_name, 'w') as f:
         f.write(shipfeatures_markdown_template)
+    
+    with open(md_description_file_name, 'w') as f:
+        f.write(shipdescription_markdown_template)
 
     return {"statusCode": 200, "body": result}
 
 #passenger_options = ["2 to 5 people", "6 to 12 people", "13 to 20 people", "21 to 50 people", "50 to 100 people"]
-passenger_options = [["2 to 5 people", [2, 5]]]
+passenger_options = [["50 to 100 people", [13, 20]]]
 #purposes_options = [["colonization", "scientific research"], ["leisure", "interstellar colaboration"], ["exploring", "earth observation"]]
-purposes_options = ["colonization, scientific research"]
+purposes_options = [["leisure", "interstellar colaboration"]]
 spaceship_functions_necessities = [
     "Life support",
     "Navigation",
@@ -165,16 +175,16 @@ spaceship_functions_necessities = [
     "Emergency medical procedures",
     "Escape capsules"
 ]
-focus_options = ["safety", "durability"]
+#focus_options = ["safety", "durability"]
 for passengers in passenger_options:
     for purposes in purposes_options:
         this_ship_funcs_necs = random.sample(spaceship_functions_necessities, 5)
         il = json.dumps(
             {
-                "purposes": purposes_options,
-                "importantForUser": focus_options,
+                "purposes": purposes,
                 "passengerCapacity": passengers[0],
             }
         )
         event = {"body": f"{il}"}
-        lambda_handler(event, passengers[1], purposes, this_ship_funcs_necs, None)
+        lambda_handler(event, passengers[1], purposes[0], this_ship_funcs_necs, None)
+      
