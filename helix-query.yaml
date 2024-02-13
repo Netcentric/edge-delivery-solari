@@ -1,0 +1,13 @@
+indices:
+  ship-specifications:
+    target: /specifications/ships/index.json
+    properties:
+      name:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      features:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      specifications:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
