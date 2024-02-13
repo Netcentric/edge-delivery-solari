@@ -1,6 +1,6 @@
 indices:
   ship-specifications:
-    target: /specifications/ships/index.json
+    target: /specifications/ships/query-index.json
     properties:
       name:
         select: head > meta[property="og:title"]
