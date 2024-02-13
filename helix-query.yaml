@@ -5,9 +5,18 @@ indices:
       name:
         select: head > meta[property="og:title"]
         value: attribute(el, "content")
-      features:
-        select: head > meta[property="og:title"]
-        value: attribute(el, "content")
-      specifications:
-        select: head > meta[property="og:title"]
-        value: attribute(el, "content")
+      feature-names:
+        select: .features > div > div:first-child
+        value: textContent(el)
+      feature-values:
+        select: .features > div > div:nth-child(2)
+        value: textContent(el)
+      specification-names:
+        select: .specifications > div > div:first-child
+        value: textContent(el)
+      specification-values:
+        select: .specifications > div > div:nth-child(2)
+        value: textContent(el)
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
