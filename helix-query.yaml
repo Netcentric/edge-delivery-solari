@@ -20,3 +20,15 @@ indices:
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+  ship-focus:
+    target: /focus/ships/query-index.json
+    properties:
+      name:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      image: 
+        select: body > meta[property="og:image"]
+        value: attribute(el, "content")
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
