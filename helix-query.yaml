@@ -27,7 +27,10 @@ indices:
         select: head > meta[property="og:title"]
         value: attribute(el, "content")
       image: 
-        select: body > meta[property="og:image"]
+        select: head > meta[property="og:image"]
+        value: attribute(el, "content")
+      description: 
+        select: head > meta[property="og:description"]
         value: attribute(el, "content")
       lastModified:
         select: none
