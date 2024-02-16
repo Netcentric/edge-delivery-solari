@@ -38,10 +38,10 @@ indices:
         value: attribute(el, "content")
       hull-finishes-names:
         select: head > meta[name^="hull-finish-image-"]
-        value: attribute(el, "name")
+        values: attribute(el, "name")
       hull-finishes-images:
         select: head > meta[name^="hull-finish-image-"]
-        value: attribute(el, "content")
+        values: attribute(el, "content")
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
