@@ -1,6 +1,6 @@
 indices:
   ship-specifications:
-    target: /specifications/ships/query-index.json
+    target: /specifications/query-index.json
     properties:
       name:
         select: head > meta[property="og:title"]
@@ -21,7 +21,7 @@ indices:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
   ship-focus:
-    target: /focus/ships/query-index.json
+    target: /focus/query-index.json
     properties:
       name:
         select: head > meta[property="og:title"]
