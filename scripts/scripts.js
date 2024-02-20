@@ -1,8 +1,8 @@
 import {
   sampleRUM,
   buildBlock,
-  loadHeader,
-  loadFooter,
+  // loadHeader,
+  // loadFooter,
   decorateButtons,
   decorateIcons,
   decorateSections,
