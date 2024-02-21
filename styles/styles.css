@@ -226,11 +226,11 @@ main .section.highlight {
   color: var(--midnight-blue-color);
 }
 
-.default-content-wrapper p:not(p ~ p) img {
+body.ship-focus .default-content-wrapper p:not(p ~ p) img {
   width: 100%;
 }
 
-.default-content-wrapper > h1:first-child {
+body.ship-focus .default-content-wrapper > h1:first-child {
   position: absolute;
   left: 0;
   right: 0;
