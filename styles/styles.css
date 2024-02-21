@@ -226,6 +226,19 @@ main .section.highlight {
   color: var(--midnight-blue-color);
 }
 
+.default-content-wrapper p:not(p ~ p) img {
+  width: 100%;
+}
+
+.default-content-wrapper > h1:first-child {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+
+/* stylelint-disable-next-line no-descending-specificity */
 p {
   font-size: var(--paragraph-font-size);
 }
