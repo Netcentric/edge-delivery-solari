@@ -18,6 +18,7 @@
   --light-color: #eee;
   --dark-color: #ccc;
   --text-color: black;
+  --midnight-blue-color: #000048;
 
   /* fonts */
   --body-font-family: "Gellix", "Gellix-fallback";
@@ -50,12 +51,14 @@
 
 @media (width >= 900px) {
   :root {
+    --heading-font-size-xxxl: 84px;
     --heading-font-size-xxl: 60px;
     --heading-font-size-xl: 48px;
     --heading-font-size-l: 36px;
     --heading-font-size-m: 30px;
     --heading-font-size-s: 24px;
     --heading-font-size-xs: 22px;
+    --paragraph-font-size: 20px;
   }
 }
 
@@ -204,8 +207,25 @@ main .section {
   }
 }
 
+@media (width >= 1920px) {
+  h1 { font-size: var(--heading-font-size-xxxl) }
+  h2 { font-size: var(--heading-font-size-xxl) }
+  h3 { font-size: var(--heading-font-size-xl) }
+  h4 { font-size: var(--heading-font-size-l) }
+  h5 { font-size: var(--heading-font-size-m) }
+  h6 { font-size: var(--heading-font-size-s) }
+}
+
 /* section metadata */
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
+}
+
+.default-content-wrapper {
+  color: var(--midnight-blue-color);
+}
+
+p {
+  font-size: var(--paragraph-font-size);
 }
