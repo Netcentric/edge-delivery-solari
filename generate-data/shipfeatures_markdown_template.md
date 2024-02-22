@@ -6,38 +6,23 @@ shortDescription
 
 ## Details
 
-+-------------------------------------+
-| Features |
-+----------------+--------------------+
-| Usage | PURPOSES |
-+----------------+--------------------+
-| FEATURE1 | feature1Description |
-+----------------+--------------------+
-| FEATURE2 | feature2Description |
-+----------------+--------------------+
-| FEATURE3 | feature3Description |
-+----------------+--------------------+
-| FEATURE4 | feature4Description |
-+----------------+--------------------+
-| FEATURE5 | feature5Description |
-+----------------+--------------------+
+| Features |              |
+| -------- | ------------ |
+| Usage    | PURPOSES     |
+| FEATURE1 | feature1Name |
+| FEATURE2 | feature2Name |
+| FEATURE3 | feature3Name |
 
-+-------------------------------------+
-| Specifications |
-+----------------+--------------------+
-| Minimum Crew | minCrew |
-+----------------+--------------------+
-| Maximum Passengers | maxCrew |
-+----------------+--------------------+
-| Length | length |
-+----------------+--------------------+
-| Width | width |
-+----------------+--------------------+
-| Height | height |
-+----------------+--------------------+
-| Weight | weight |
-+----------------+--------------------+
-| Range | range |
-+----------------+--------------------+
-| Cargo Capacity | cargoCapacity |
-+----------------+--------------------+
+| Specifications     |               |
+| ------------------ | ------------- |
+| Number of Passengers       | crew       |
+| Length             | length        |
+| Width              | width         |
+| Height             | height        |
+| Weight             | weight        |
+| Range              | range         |
+| Cargo Capacity     | cargoCapacity |
+
+| Metadata |               |
+| ---------| ------------- |
+| Model    | baseModelName |
