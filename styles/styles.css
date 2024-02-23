@@ -247,13 +247,15 @@ body.ship-focus .default-content-wrapper > h1:first-child {
   position: absolute;
   left: 0;
   right: 0;
-  width: 500px;
+  width: 50%;
   margin: 100px auto 0;
   word-break: keep-all;
   text-align: center;
   font-size: 170px;
   color: var(--dark-blue);
   text-transform: uppercase;
+  text-indent: -230px;
+  line-height: 150px;
 }
 
 
