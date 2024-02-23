@@ -247,15 +247,23 @@ body.ship-focus .default-content-wrapper > h1:first-child {
   position: absolute;
   left: 0;
   right: 0;
-  width: 50%;
   margin: 100px auto 0;
   word-break: keep-all;
-  text-align: center;
+  word-spacing: 9999px;
+  text-align: left;
   font-size: 170px;
   color: var(--dark-blue);
   text-transform: uppercase;
-  text-indent: -230px;
+  transform: skew(40deg);
+  padding-left: 400px;
   line-height: 150px;
+}
+
+body.ship-focus .default-content-wrapper > h1:first-child .rotate {
+  position: relative;
+  white-space: pre-wrap;
+  transform: skew(-40deg);
+  display: inline-block;
 }
 
 

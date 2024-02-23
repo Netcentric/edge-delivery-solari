@@ -8,6 +8,7 @@ import {
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
+  decorateSpaceshipFocusPageH1,
   waitForLCP,
   loadBlocks,
   loadCSS,
@@ -67,6 +68,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateSpaceshipFocusPageH1();
 }
 
 /**
