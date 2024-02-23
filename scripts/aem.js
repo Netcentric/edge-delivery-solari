@@ -633,6 +633,18 @@ function decorateBlocks(main) {
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
 }
 
+function decorateSpaceshipFocusPageH1() {
+  const spaceshipFocusPageH1Element = document.querySelector('body.ship-focus .default-content-wrapper > h1:first-child');
+
+  if (spaceshipFocusPageH1Element) {
+    const innerText = spaceshipFocusPageH1Element.textContent.trim();
+    const arr = innerText.split(' ');
+    const result = `<span class="rotate">${arr.join(' </span><span class="rotate">')}</span>`;
+
+    spaceshipFocusPageH1Element.innerHTML = result;
+  }
+}
+
 /**
  * Loads a block named 'header' into header
  * @param {Element} header header element
@@ -691,6 +703,7 @@ export {
   decorateIcons,
   decorateSections,
   decorateTemplateAndTheme,
+  decorateSpaceshipFocusPageH1,
   fetchPlaceholders,
   getMetadata,
   loadBlock,
