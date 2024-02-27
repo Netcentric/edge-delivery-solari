@@ -42,7 +42,7 @@ function addSpecifications(specs) {
   parentElement.appendChild(specContainer);
 }
 
-async function prepareSpecification(main) {
+async function prepareSpecification() {
   try {
     if (!document.body.classList.contains('ship-focus')) {
       return;
