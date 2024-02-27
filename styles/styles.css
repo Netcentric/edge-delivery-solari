@@ -217,6 +217,60 @@ main .section.highlight {
   color: var(--midnight-blue-color);
 }
 
+.default-content-wrapper h2 {
+  margin-top: 60px;
+}
+
+.default-content-wrapper h3:nth-child(odd) {
+  float: right;
+  width: 50%;
+  padding-left: 50%;
+  font-size: var(--paragraph-font-size);
+  margin-top: 80px;
+}
+
+.default-content-wrapper h3:nth-child(odd) + p {
+  float: left;
+  width: 50%;
+  margin-top: -30px;
+  height: 306px;
+}
+
+.default-content-wrapper h3:nth-child(odd) + p img{
+  height: 100%;
+}
+
+.default-content-wrapper h3:nth-child(even) {
+  float: left;
+  width: 50%;
+  padding-right: 50%;
+  font-size: var(--paragraph-font-size);
+  margin-top: 80px;
+}
+
+.default-content-wrapper h3:nth-child(even) + p {
+  float: right;
+  width: 50%;
+  margin-top: -30px;
+  height: 306px;
+}
+
+
+.default-content-wrapper h3:nth-child(even) + p img{
+  height: 100%;
+  float: right;
+}
+
+.default-content-wrapper h3:nth-child(odd) + p + p {
+  padding-left: 50%;
+  line-height: 27px;
+}
+
+.default-content-wrapper h3:nth-child(even) + p + p {
+  padding-right: 50%;
+  line-height: 27px;
+}
+
 
 /* stylelint-disable-next-line no-descending-specificity */
 p {
