@@ -18,12 +18,12 @@ async function prepareSpecification(main) {
     if (!document.body.classList.contains('ship-focus')) {
       return;
     }
-    const specificationPath = getMetadata('specification');
+    const specificationPath = getMetadata('specifications');
     if (!specificationPath) {
       return;
     }
     const specificationUrl = new URL(specificationPath);
-    const specificationsResponse = await fetch('/specifications/ships/query-index.json');
+    const specificationsResponse = await fetch('/specifications/query-index.json');
     if (!specificationsResponse.ok) {
       return;
     }
