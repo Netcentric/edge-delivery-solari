@@ -271,7 +271,58 @@ main .section.highlight {
   line-height: 27px;
 }
 
+.default-content-wrapper .info-container {
+  position: absolute;
+  top: 550px;
+  right: 130px;
+}
 
+.default-content-wrapper .info-container .info-number {
+  font-size: 50px;
+  line-height: 70px;
+  font-weight: 300;
+}
+
+.default-content-wrapper .info-container .info-text {
+  font-size: 15px;
+  line-height: 24px;
+  padding-left: 5px;
+  vertical-align: super;
+}
+
+.default-content-wrapper .info {
+  background-color: var(--background-color);
+  opacity: 0.9;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.default-content-wrapper .spec-container {
+  margin-top: 86px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.default-content-wrapper .spec-container p {
+  margin-left: 0 !important;
+}
+
+.default-content-wrapper .spec-container table {
+  width: 100%;
+  margin-top: 37px;
+}
+
+.default-content-wrapper .spec-container th {
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.default-content-wrapper .spec-container td {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+}
 /* stylelint-disable-next-line no-descending-specificity */
 p {
   font-size: var(--paragraph-font-size);

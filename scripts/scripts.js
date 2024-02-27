@@ -16,6 +16,32 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
+function addSpeedInformation(info, containerElement) {
+  const infoElement = document.createElement('div');
+
+  infoElement.classList.add('info');
+
+  const texts = info.split(' ');
+  const result = `<span class="info-number">${texts[0]}</span><span class="info-text">${texts.slice(1).join(' ')}</span>`;
+
+  infoElement.innerHTML = result;
+  containerElement.appendChild(infoElement);
+}
+
+function addSpecifications(specs) {
+  const specContainer = document.createElement('div');
+
+  specContainer.classList.add('spec-container');
+
+  const content = `<h2>SPECIFICATIONS</h2><div><p>Learn more about the ${document.querySelector('h1').textContent} and its technical specifications.</p></div>
+  <table class="spec-table"><tr><th>length</th><th>width</th><th>height</th><th>weight</th></tr>
+  <tr><td>${specs.Length}</td><td>${specs.Width}</td><td>${specs.Height}</td><td>${specs.Weight}</td></tr><table></div>`;
+  specContainer.innerHTML = content;
+
+  const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');
+  parentElement.appendChild(specContainer);
+}
+
 async function prepareSpecification(main) {
   try {
     if (!document.body.classList.contains('ship-focus')) {
@@ -35,6 +61,23 @@ async function prepareSpecification(main) {
     if (!specification) {
       return;
     }
+
+    const specificationsObj = JSON.parse(specification.specifications);
+    const infoContainer = document.createElement('div');
+    const titleElement = document.querySelector('h2');
+
+    if (specificationsObj.Range) {
+      addSpeedInformation(specificationsObj.Range, infoContainer);
+      // Temp content as it is not received from document
+      addSpeedInformation('570 light years', infoContainer);
+      addSpeedInformation('2.6 Sec', infoContainer);
+    }
+    addSpecifications(specificationsObj);
+
+    infoContainer.classList.add('info-container');
+    titleElement.parentNode.insertBefore(infoContainer, titleElement);
+
+    // these dataset are reference and will be removed later
     document.body.dataset.features = specification.features;
     document.body.dataset.specification = specification.specifications;
   } catch (e) {
