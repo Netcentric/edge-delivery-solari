@@ -8,6 +8,7 @@ import {
   decorateBlocks,
   decorateTemplateAndTheme,
   decorateSpaceshipFocusPageH1,
+  decorateGroups,
   waitForLCP,
   loadBlocks,
   loadCSS,
@@ -69,9 +70,10 @@ async function prepareSpecification() {
     if (specificationsObj.Range) {
       addSpeedInformation(specificationsObj.Range, infoContainer);
       // Temp content as it is not received from document
-      addSpeedInformation('570 light years', infoContainer);
-      addSpeedInformation('2.6 Sec', infoContainer);
+      addSpeedInformation(specificationsObj['Number of Passengers'], infoContainer);
+      addSpeedInformation(specificationsObj.Length, infoContainer);
     }
+
     addSpecifications(specificationsObj);
 
     infoContainer.classList.add('info-container');
@@ -81,6 +83,7 @@ async function prepareSpecification() {
     document.body.dataset.features = specification.features;
     document.body.dataset.specification = specification.specifications;
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error('could not load specifications', e);
   }
 }
@@ -122,6 +125,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateGroups();
   decorateSpaceshipFocusPageH1();
 }
 
