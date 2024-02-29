@@ -634,28 +634,30 @@ function decorateBlocks(main) {
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
 }
 
-function decorateEngineFocusPage() {
-  const parentElement = document.querySelector('body.engine-focus .default-content-wrapper');
-  const engineFocusH1 = document.querySelector('body.engine-focus .default-content-wrapper > h1:first-child');
+function decorateFocusPage(pageType) {
+  const parentElement = document.querySelector(`body.${pageType}-focus .default-content-wrapper`);
+  const focusH1 = document.querySelector(`body.${pageType}-focus .default-content-wrapper > h1:first-child`);
 
-  if (engineFocusH1) {
-    engineFocusH1.innerHTML = `Selected Spaceship: ${engineFocusH1.textContent}`;
+  if (!parentElement) {
+    return;
   }
 
-  if (parentElement) {
-    const groupElement = document.createElement('div');
-    const engineFocusH2 = parentElement.querySelector('h2');
-    const buttonSelect = document.createElement('button');
-    groupElement.classList.add('group');
-    buttonSelect.classList.add('btn-select');
-    buttonSelect.textContent = 'Select ';
-
-    const description = parentElement.querySelector('h2 + p');
-    groupElement.appendChild(engineFocusH2);
-    groupElement.appendChild(description);
-    groupElement.appendChild(buttonSelect);
-    parentElement.appendChild(groupElement);
+  if (focusH1) {
+    focusH1.innerHTML = `Selected Spaceship: ${focusH1.textContent}`;
   }
+
+  const groupElement = document.createElement('div');
+  const focusH2 = parentElement.querySelector('h2');
+  const buttonSelect = document.createElement('button');
+  groupElement.classList.add('group');
+  buttonSelect.classList.add('btn-select');
+  buttonSelect.textContent = 'Select ';
+
+  const description = parentElement.querySelector('h2 + p');
+  groupElement.appendChild(focusH2);
+  groupElement.appendChild(description);
+  groupElement.appendChild(buttonSelect);
+  parentElement.appendChild(groupElement);
 }
 
 function decorateGroups() {
@@ -782,7 +784,7 @@ export {
   decorateTemplateAndTheme,
   decorateSpaceshipFocusPageH1,
   decorateGroups,
-  decorateEngineFocusPage,
+  decorateFocusPage,
   fetchPlaceholders,
   getMetadata,
   loadBlock,
