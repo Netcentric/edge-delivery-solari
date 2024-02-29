@@ -36,7 +36,7 @@ function addSpecifications(specs) {
 
   const content = `<h2>SPECIFICATIONS</h2><div><p>Learn more about the ${document.querySelector('h1').textContent} and its technical specifications.</p></div>
   <table class="spec-table"><tr><th>length</th><th>width</th><th>height</th><th>weight</th></tr>
-  <tr><td>${specs.Length}</td><td>${specs.Width}</td><td>${specs.Height}</td><td>${specs.Weight}</td></tr><table></div>`;
+  <tr><td>${specs.Length.split(',')[0]}</td><td>${specs.Width.split(',')[0]}</td><td>${specs.Height.split(',')[0]}</td><td>${specs.Weight.split(',')[0]}</td></tr><table></div>`;
   specContainer.innerHTML = content;
 
   const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');

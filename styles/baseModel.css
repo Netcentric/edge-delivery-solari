@@ -27,18 +27,18 @@ body.ship-focus .default-content-wrapper .main-group img {
 
 body.ship-focus .default-content-wrapper .main-group > h1:first-child {
   position: absolute;
-  left: 0;
   right: 0;
-  margin: 100px auto 0;
+  margin: 64px auto 0;
   word-break: keep-all;
   word-spacing: 9999px;
   text-align: left;
-  font-size: 170px;
+  font-size: 150px;
   color: var(--dark-blue);
   text-transform: uppercase;
   transform: skew(40deg);
   line-height: 150px;
   width: 60%;
+  text-shadow: 0 0 64px white;
 }
 
 body.ship-focus .default-content-wrapper .main-group > h1:first-child .rotate {
