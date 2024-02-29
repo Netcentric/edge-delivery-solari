@@ -17,13 +17,13 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
-function addSpeedInformation(info, containerElement) {
+function addSpeedInformation(info, containerElement, name, splitWords = false) {
   const infoElement = document.createElement('div');
 
   infoElement.classList.add('info');
 
   const texts = info.split(' ');
-  const result = `<span class="info-number">${texts[0]}</span><span class="info-text">${texts.slice(1).join(' ')}</span>`;
+  const result = `<span class="info-number">${splitWords ? info : texts[0]}</span><span class="info-text">${splitWords ? name : texts.slice(1).join(' ')}</span>`;
 
   infoElement.innerHTML = result;
   containerElement.appendChild(infoElement);
@@ -36,7 +36,7 @@ function addSpecifications(specs) {
 
   const content = `<h2>SPECIFICATIONS</h2><div><p>Learn more about the ${document.querySelector('h1').textContent} and its technical specifications.</p></div>
   <table class="spec-table"><tr><th>length</th><th>width</th><th>height</th><th>weight</th></tr>
-  <tr><td>${specs.Length}</td><td>${specs.Width}</td><td>${specs.Height}</td><td>${specs.Weight}</td></tr><table></div>`;
+  <tr><td>${specs.Length.split(',')[0]}</td><td>${specs.Width.split(',')[0]}</td><td>${specs.Height.split(',')[0]}</td><td>${specs.Weight.split(',')[0]}</td></tr><table></div>`;
   specContainer.innerHTML = content;
 
   const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');
@@ -70,7 +70,7 @@ async function prepareSpecification() {
     if (specificationsObj.Range) {
       addSpeedInformation(specificationsObj.Range, infoContainer);
       // Temp content as it is not received from document
-      addSpeedInformation(specificationsObj['Number of Passengers'], infoContainer);
+      addSpeedInformation(specificationsObj['Number of Passengers'].replace('to', '-'), infoContainer, 'Passengers', true);
       addSpeedInformation(specificationsObj.Length, infoContainer);
     }
 
