@@ -37,8 +37,8 @@ body.ship-focus .default-content-wrapper .main-group > h1:first-child {
   color: var(--dark-blue);
   text-transform: uppercase;
   transform: skew(40deg);
-  padding-left: 400px;
   line-height: 150px;
+  width: 60%;
 }
 
 body.ship-focus .default-content-wrapper .main-group > h1:first-child .rotate {
