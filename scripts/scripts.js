@@ -17,13 +17,13 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
-function addSpeedInformation(info, containerElement) {
+function addSpeedInformation(info, containerElement, name, splitWords = false) {
   const infoElement = document.createElement('div');
 
   infoElement.classList.add('info');
 
   const texts = info.split(' ');
-  const result = `<span class="info-number">${texts[0]}</span><span class="info-text">${texts.slice(1).join(' ')}</span>`;
+  const result = `<span class="info-number">${splitWords ? info : texts[0]}</span><span class="info-text">${splitWords ? name : texts.slice(1).join(' ')}</span>`;
 
   infoElement.innerHTML = result;
   containerElement.appendChild(infoElement);
@@ -70,7 +70,7 @@ async function prepareSpecification() {
     if (specificationsObj.Range) {
       addSpeedInformation(specificationsObj.Range, infoContainer);
       // Temp content as it is not received from document
-      addSpeedInformation(specificationsObj['Number of Passengers'], infoContainer);
+      addSpeedInformation(specificationsObj['Number of Passengers'].replace('to', '-'), infoContainer, 'Passengers', true);
       addSpeedInformation(specificationsObj.Length, infoContainer);
     }
 
