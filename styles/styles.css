@@ -10,6 +10,8 @@
   --text-color: black;
   --midnight-blue-color: #000048;
   --dark-blue: #2F78C4;
+  --dark-teal: #11C7CC;
+
 
   /* fonts */
   --body-font-family: "Gellix", "Gellix-fallback";
@@ -391,6 +393,77 @@ main .section.highlight {
   line-height: 26px;
   font-weight: 600;
 }
+
+body.engine-focus .section {
+  padding: 0;
+}
+
+body.engine-focus .default-content-wrapper { 
+  display: grid; 
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  height: 100%;
+  max-width: 100%;
+}
+
+body.engine-focus .default-content-wrapper h1 {
+  grid-row: 1 / 1;
+  grid-column: 1 / 2;
+  font-size: var(--paragraph-font-size);
+  line-height: 26px;
+  margin: 64px 102px 0 56px;
+}
+
+body.engine-focus .default-content-wrapper .group {
+  margin-right: 117px;
+  margin-left: 56px;
+  font-size: var(--paragraph-font-size);
+}
+
+body.engine-focus .default-content-wrapper .group h2 {
+  line-height: 26px;
+  font-size: var(--paragraph-font-size);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.engine-focus .default-content-wrapper .group h2 + p {
+  line-height: 27px;
+  margin-top: 30px;
+  margin-bottom: 35px;
+}
+
+body.engine-focus .default-content-wrapper .group .btn-select {
+  padding: 15px 45px 15px 25px;
+  border-radius: 100px;
+  background-color: var(--dark-teal);
+  line-height: 20px;
+  color: var(--midnight-blue-color);
+  font-size: var(--paragraph-font-size);
+  margin: 0;
+}
+
+body.engine-focus .default-content-wrapper .group .btn-select::after {
+  content: url('../app/arrow-right-bold.svg');
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  position: absolute;
+  padding-left: 5px;
+}
+/* stylelint-disable-next-line no-descending-specificity */
+body.engine-focus .default-content-wrapper h1 + p {
+  grid-row: 1 / 4;
+  grid-column: 2 / 3;
+  margin: 0;
+  height: 100vh;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.engine-focus .default-content-wrapper h1 + p img {
+  height: 100%;
+}
+
 /* stylelint-disable-next-line no-descending-specificity */
 p {
   font-size: var(--paragraph-font-size);
