@@ -633,8 +633,57 @@ function decorateBlocks(main) {
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
 }
 
+function decorateGroups() {
+  const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');
+  const groupContainer = document.createElement('div');
+  const subcontainer = document.createElement('div');
+  let groupElement = document.createElement('div');
+  let isCard = false;
+  let child = parentElement.firstChild;
+  subcontainer.classList.add('blocks');
+  groupElement.classList.add('main-group');
+
+  while (child) {
+    if (groupElement.children.length > 0) {
+      switch (child.nodeName) {
+        case 'H1':
+          groupContainer.appendChild(groupElement);
+          groupElement = document.createElement('div');
+          break;
+        case 'H2':
+          groupContainer.appendChild(groupElement);
+          groupElement = document.createElement('div');
+          groupElement.classList.add('sub-group');
+          break;
+        case 'H3':
+          if (!isCard) {
+            groupContainer.appendChild(groupElement);
+          } else {
+            subcontainer.appendChild(groupElement);
+          }
+          groupElement = document.createElement('div');
+          groupElement.classList.add('block');
+          isCard = true;
+          break;
+        default:
+          break;
+      }
+      groupElement.appendChild(child);
+    } else {
+      groupElement.appendChild(child);
+    }
+    child = parentElement.firstChild;
+
+    if (!child) {
+      subcontainer.appendChild(groupElement);
+      groupContainer.appendChild(subcontainer);
+    }
+  }
+  parentElement.appendChild(groupContainer);
+}
+
 function decorateSpaceshipFocusPageH1() {
-  const spaceshipFocusPageH1Element = document.querySelector('body.ship-focus .default-content-wrapper > h1:first-child');
+  const spaceshipFocusPageH1Element = document.querySelector('body.ship-focus .default-content-wrapper .main-group h1');
 
   if (spaceshipFocusPageH1Element) {
     const innerText = spaceshipFocusPageH1Element.textContent.trim();
@@ -704,6 +753,7 @@ export {
   decorateSections,
   decorateTemplateAndTheme,
   decorateSpaceshipFocusPageH1,
+  decorateGroups,
   fetchPlaceholders,
   getMetadata,
   loadBlock,

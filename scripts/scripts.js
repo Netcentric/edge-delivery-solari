@@ -1,6 +1,5 @@
 import {
   sampleRUM,
-  buildBlock,
   // loadHeader,
   // loadFooter,
   decorateButtons,
@@ -9,25 +8,83 @@ import {
   decorateBlocks,
   decorateTemplateAndTheme,
   decorateSpaceshipFocusPageH1,
+  decorateGroups,
   waitForLCP,
   loadBlocks,
   loadCSS,
+  getMetadata,
 } from './aem.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
-/**
- * Builds hero block and prepends to main in a new section.
- * @param {Element} main The container element
- */
-function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
+function addSpeedInformation(info, containerElement) {
+  const infoElement = document.createElement('div');
+
+  infoElement.classList.add('info');
+
+  const texts = info.split(' ');
+  const result = `<span class="info-number">${texts[0]}</span><span class="info-text">${texts.slice(1).join(' ')}</span>`;
+
+  infoElement.innerHTML = result;
+  containerElement.appendChild(infoElement);
+}
+
+function addSpecifications(specs) {
+  const specContainer = document.createElement('div');
+
+  specContainer.classList.add('spec-container');
+
+  const content = `<h2>SPECIFICATIONS</h2><div><p>Learn more about the ${document.querySelector('h1').textContent} and its technical specifications.</p></div>
+  <table class="spec-table"><tr><th>length</th><th>width</th><th>height</th><th>weight</th></tr>
+  <tr><td>${specs.Length}</td><td>${specs.Width}</td><td>${specs.Height}</td><td>${specs.Weight}</td></tr><table></div>`;
+  specContainer.innerHTML = content;
+
+  const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');
+  parentElement.appendChild(specContainer);
+}
+
+async function prepareSpecification() {
+  try {
+    if (!document.body.classList.contains('ship-focus')) {
+      return;
+    }
+    const specificationPath = getMetadata('specifications');
+    if (!specificationPath) {
+      return;
+    }
+    const specificationUrl = new URL(specificationPath);
+    const specificationsResponse = await fetch('/specifications/query-index.json');
+    if (!specificationsResponse.ok) {
+      return;
+    }
+    const specifications = await specificationsResponse.json();
+    const specification = specifications.data.find((s) => s.path === specificationUrl.pathname);
+    if (!specification) {
+      return;
+    }
+
+    const specificationsObj = JSON.parse(specification.specifications);
+    const infoContainer = document.createElement('div');
+    const titleElement = document.querySelector('h2');
+
+    if (specificationsObj.Range) {
+      addSpeedInformation(specificationsObj.Range, infoContainer);
+      // Temp content as it is not received from document
+      addSpeedInformation(specificationsObj['Number of Passengers'], infoContainer);
+      addSpeedInformation(specificationsObj.Length, infoContainer);
+    }
+
+    addSpecifications(specificationsObj);
+
+    infoContainer.classList.add('info-container');
+    titleElement.parentNode.insertBefore(infoContainer, titleElement);
+
+    // these dataset are reference and will be removed later
+    document.body.dataset.features = specification.features;
+    document.body.dataset.specification = specification.specifications;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('could not load specifications', e);
   }
 }
 
@@ -49,7 +106,7 @@ async function loadFonts() {
  */
 function buildAutoBlocks(main) {
   try {
-    buildHeroBlock(main);
+    prepareSpecification(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -68,6 +125,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateGroups();
   decorateSpaceshipFocusPageH1();
 }
 
