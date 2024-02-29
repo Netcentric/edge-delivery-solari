@@ -635,6 +635,9 @@ function decorateBlocks(main) {
 
 function decorateGroups() {
   const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');
+  if (!parentElement) {
+    return;
+  }
   const groupContainer = document.createElement('div');
   const subcontainer = document.createElement('div');
   let groupElement = document.createElement('div');
