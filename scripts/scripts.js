@@ -71,7 +71,7 @@ async function prepareSpecification() {
     if (specificationsObj.Range) {
       addSpeedInformation(specificationsObj.Range, infoContainer);
       // Temp content as it is not received from document
-      addSpeedInformation(specificationsObj['Number of Passengers'].replace('to', '-'), infoContainer, 'Passengers', true);
+      addSpeedInformation(specificationsObj['Number of Passengers'].replace('to', '–'), infoContainer, 'passengers', true);
       addSpeedInformation(specificationsObj.Length, infoContainer);
     }
 

@@ -358,7 +358,6 @@ main .section.highlight {
   font-size: 15px;
   line-height: 24px;
   padding-left: 5px;
-  vertical-align: super;
 }
 
 .default-content-wrapper .info {
