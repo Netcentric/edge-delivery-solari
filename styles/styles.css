@@ -422,7 +422,7 @@ body.accessory-focus .default-content-wrapper .group {
   font-size: var(--paragraph-font-size);
   display: flex;
   justify-content: space-between;
-  margin: 64px 102px 40px 56px;
+  padding: 64px 102px 40px 56px;
   width: 50%;
   flex-direction: column;
 }
@@ -457,6 +457,7 @@ body.interior-focus .default-content-wrapper p:first-child,
 body.accessory-focus .default-content-wrapper p:first-child {
   margin: 0;
   height: 100vh;
+  width: 50%;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -465,7 +466,6 @@ body.interior-focus .default-content-wrapper p:first-child img,
 body.accessory-focus .default-content-wrapper p:first-child img {
   height: 100vh;
   object-fit: cover;
-  object-position: 100% center;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
