@@ -403,85 +403,69 @@ body.accessory-focus .section {
 body.engine-focus .default-content-wrapper,
 body.interior-focus .default-content-wrapper,
 body.accessory-focus .default-content-wrapper { 
-  display: grid; 
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
+  display: flex; 
   height: 100%;
   max-width: 100%;
+  flex-direction: row-reverse;
 }
 
 body.engine-focus .default-content-wrapper h1,
 body.interior-focus .default-content-wrapper h1,
 body.accessory-focus .default-content-wrapper h1 {
-  grid-row: 1 / 1;
-  grid-column: 1 / 2;
   font-size: var(--paragraph-font-size);
   line-height: 26px;
-  margin: 64px 102px 0 56px;
 }
 
 body.engine-focus .default-content-wrapper .group,
 body.interior-focus .default-content-wrapper .group,
 body.accessory-focus .default-content-wrapper .group {
-  margin-right: 117px;
-  margin-left: 56px;
   font-size: var(--paragraph-font-size);
+  display: flex;
+  justify-content: space-between;
+  margin: 64px 102px 40px 56px;
+  width: 50%;
+  flex-direction: column;
 }
 
-body.engine-focus .default-content-wrapper .group h2,
-body.interior-focus .default-content-wrapper .group h2,
-body.accessory-focus .default-content-wrapper .group h2 {
+body.engine-focus .default-content-wrapper .sub-group,
+body.interior-focus .default-content-wrapper .sub-group,
+body.accessory-focus .default-content-wrapper .sub-group {
+  font-size: var(--paragraph-font-size);
+  display: flex;
+  flex-direction: column;
+}
+
+body.engine-focus .default-content-wrapper .sub-group h2,
+body.interior-focus .default-content-wrapper .sub-group h2,
+body.accessory-focus .default-content-wrapper .sub-group h2 {
   line-height: 26px;
+  margin: 0;
   font-size: var(--paragraph-font-size);
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
-body.engine-focus .default-content-wrapper .group h2 + p,
-body.interior-focus .default-content-wrapper .group h2 + p,
-body.accessory-focus .default-content-wrapper .group h2 + p {
+body.engine-focus .default-content-wrapper .sub-group h2 + p,
+body.interior-focus .default-content-wrapper .sub-group h2 + p,
+body.accessory-focus .default-content-wrapper .sub-group h2 + p {
   line-height: 27px;
   margin-top: 30px;
-  margin-bottom: 35px;
 }
 
-body.engine-focus .default-content-wrapper .group .btn-select,
-body.interior-focus .default-content-wrapper .group .btn-select,
-body.accessory-focus .default-content-wrapper .group .btn-select {
-  padding: 15px 45px 15px 25px;
-  border-radius: 100px;
-  background-color: var(--dark-teal);
-  line-height: 20px;
-  color: var(--midnight-blue-color);
-  font-size: var(--paragraph-font-size);
-  margin: 0;
-}
-
-body.engine-focus .default-content-wrapper .group .btn-select::after,
-body.interior-focus .default-content-wrapper .group .btn-select::after,
-body.accessory-focus .default-content-wrapper .group .btn-select::after {
-  content: url('../app/arrow-right-bold.svg');
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  position: absolute;
-  padding-left: 5px;
-}
 /* stylelint-disable-next-line no-descending-specificity */
-body.engine-focus .default-content-wrapper h1 + p,
-body.interior-focus .default-content-wrapper h1 + p,
-body.accessory-focus .default-content-wrapper h1 + p {
-  grid-row: 1 / 4;
-  grid-column: 2 / 3;
+body.engine-focus .default-content-wrapper p:first-child,
+body.interior-focus .default-content-wrapper p:first-child,
+body.accessory-focus .default-content-wrapper p:first-child {
   margin: 0;
   height: 100vh;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
-body.engine-focus .default-content-wrapper h1 + p img,
-body.interior-focus .default-content-wrapper h1 + p img,
-body.accessory-focus .default-content-wrapper h1 + p img {
-  height: 100%;
+body.engine-focus .default-content-wrapper p:first-child img,
+body.interior-focus .default-content-wrapper p:first-child img,
+body.accessory-focus .default-content-wrapper p:first-child img {
+  height: 100vh;
+  object-fit: cover;
+  object-position: 100% center;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */

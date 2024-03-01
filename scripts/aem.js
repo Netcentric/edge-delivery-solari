@@ -642,21 +642,21 @@ function decorateFocusPage(pageType) {
     return;
   }
 
+  const groupElement = document.createElement('div');
+  const subGroupElement = document.createElement('div');
+  const focusH2 = parentElement.querySelector('h2');
+  const description = parentElement.querySelector('h2 + p');
+
   if (focusH1) {
     focusH1.innerHTML = `Selected Spaceship: ${focusH1.textContent}`;
   }
 
-  const groupElement = document.createElement('div');
-  const focusH2 = parentElement.querySelector('h2');
-  const buttonSelect = document.createElement('button');
   groupElement.classList.add('group');
-  buttonSelect.classList.add('btn-select');
-  buttonSelect.textContent = 'Select ';
-
-  const description = parentElement.querySelector('h2 + p');
-  groupElement.appendChild(focusH2);
-  groupElement.appendChild(description);
-  groupElement.appendChild(buttonSelect);
+  subGroupElement.classList.add('sub-group');
+  groupElement.appendChild(focusH1);
+  subGroupElement.appendChild(focusH2);
+  subGroupElement.appendChild(description);
+  groupElement.appendChild(subGroupElement);
   parentElement.appendChild(groupElement);
 }
 
