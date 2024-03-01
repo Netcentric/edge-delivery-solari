@@ -21,6 +21,7 @@
  * @param {string} data.target subject of the checkpoint event,
  * for instance the href of a link, or a search term
  */
+
 function sampleRUM(checkpoint, data = {}) {
   sampleRUM.defer = sampleRUM.defer || [];
   const defer = (fnname) => {
@@ -633,6 +634,32 @@ function decorateBlocks(main) {
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
 }
 
+function decorateFocusPage(pageType) {
+  const parentElement = document.querySelector(`body.${pageType}-focus .default-content-wrapper`);
+  const focusH1 = document.querySelector(`body.${pageType}-focus .default-content-wrapper > h1:first-child`);
+
+  if (!parentElement) {
+    return;
+  }
+
+  const groupElement = document.createElement('div');
+  const subGroupElement = document.createElement('div');
+  const focusH2 = parentElement.querySelector('h2');
+  const description = parentElement.querySelector('h2 + p');
+
+  if (focusH1) {
+    focusH1.innerHTML = `Selected Spaceship: ${focusH1.textContent}`;
+  }
+
+  groupElement.classList.add('group');
+  subGroupElement.classList.add('sub-group');
+  groupElement.appendChild(focusH1);
+  subGroupElement.appendChild(focusH2);
+  subGroupElement.appendChild(description);
+  groupElement.appendChild(subGroupElement);
+  parentElement.appendChild(groupElement);
+}
+
 function decorateGroups() {
   const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');
   if (!parentElement) {
@@ -757,6 +784,7 @@ export {
   decorateTemplateAndTheme,
   decorateSpaceshipFocusPageH1,
   decorateGroups,
+  decorateFocusPage,
   fetchPlaceholders,
   getMetadata,
   loadBlock,

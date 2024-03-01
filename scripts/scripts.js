@@ -13,6 +13,7 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
+  decorateFocusPage,
 } from './aem.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -127,6 +128,9 @@ export function decorateMain(main) {
   decorateBlocks(main);
   decorateGroups();
   decorateSpaceshipFocusPageH1();
+  decorateFocusPage('engine');
+  decorateFocusPage('interior');
+  decorateFocusPage('accessory');
 }
 
 /**
