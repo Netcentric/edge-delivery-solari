@@ -47,3 +47,8 @@ body.ship-focus .default-content-wrapper .main-group > h1:first-child .rotate {
   transform: skew(-40deg);
   display: inline-block;
 }
+
+body.ship-focus .default-content-wrapper .sub-group p,
+body.ship-focus .default-content-wrapper .block:last-child p:last-child {
+  width: 80%;
+}
