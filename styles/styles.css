@@ -425,6 +425,7 @@ body.accessory-focus .default-content-wrapper .group {
   padding: 64px 102px 40px 56px;
   width: 50%;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 body.engine-focus .default-content-wrapper .sub-group,
