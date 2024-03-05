@@ -30,9 +30,20 @@ function addSpeedInformation(info, containerElement, name, splitWords = false) {
   containerElement.appendChild(infoElement);
 }
 
-function addSpecifications(specs) {
-  const specContainer = document.createElement('div');
+function addShipSpecifications(specs) {
+  const infoContainer = document.createElement('div');
+  const titleElement = document.querySelector('h2');
 
+  if (specs.Range) {
+    addSpeedInformation(specs.Range, infoContainer);
+    // Temp content as it is not received from document
+    addSpeedInformation(specs['Number of Passengers'].replace('to', '–').replaceAll(' ', ''), infoContainer, 'passengers', true);
+    addSpeedInformation(specs.Length, infoContainer);
+  }
+  infoContainer.classList.add('info-container');
+  titleElement.parentNode.insertBefore(infoContainer, titleElement);
+
+  const specContainer = document.createElement('div');
   specContainer.classList.add('spec-container');
 
   const content = `<h2>SPECIFICATIONS</h2><div><p>Learn more about the ${document.querySelector('h1').textContent} and its technical specifications.</p></div>
@@ -44,9 +55,28 @@ function addSpecifications(specs) {
   parentElement.appendChild(specContainer);
 }
 
+function addEngineSpecifications(specs) {
+  const specContainer = document.createElement('div');
+  specContainer.classList.add('spec-container');
+
+  const content = `<table>
+    <tr><td>Length</td><td>${specs.Length}</td></tr>
+    <tr><td>Width</td><td>${specs.Width}</td></tr>
+    <tr><td>Maximum Speed</td><td>${specs['Maximum Speed']}</td></tr>
+    <tr><td>Range</td><td>${specs.Range}</td></tr>
+  <table>`;
+  specContainer.innerHTML = content;
+
+  const parentElement = document.querySelector('body.engine-focus .default-content-wrapper');
+  parentElement.appendChild(specContainer);
+}
+
 async function prepareSpecification() {
+  const isTemplate = (template) => document.body.classList.contains(template);
+  const isShipFocus = isTemplate('ship-focus');
+  const isEngineFocus = !isShipFocus && isTemplate('engine-focus');
   try {
-    if (!document.body.classList.contains('ship-focus')) {
+    if (!isShipFocus && !isEngineFocus) {
       return;
     }
     const specificationPath = getMetadata('specifications');
@@ -65,22 +95,13 @@ async function prepareSpecification() {
     }
 
     const specificationsObj = JSON.parse(specification.specifications);
-    const infoContainer = document.createElement('div');
-    const titleElement = document.querySelector('h2');
 
-    if (specificationsObj.Range) {
-      addSpeedInformation(specificationsObj.Range, infoContainer);
-      // Temp content as it is not received from document
-      addSpeedInformation(specificationsObj['Number of Passengers'].replace('to', '–').replaceAll(' ', ''), infoContainer, 'passengers', true);
-      addSpeedInformation(specificationsObj.Length, infoContainer);
+    if (isShipFocus) {
+      addShipSpecifications(specificationsObj);
+    } else /* if (isEngineFocus) */ {
+      addEngineSpecifications(specificationsObj);
     }
 
-    addSpecifications(specificationsObj);
-
-    infoContainer.classList.add('info-container');
-    titleElement.parentNode.insertBefore(infoContainer, titleElement);
-
-    // these dataset are reference and will be removed later
     document.body.dataset.features = specification.features;
     document.body.dataset.specification = specification.specifications;
   } catch (e) {
