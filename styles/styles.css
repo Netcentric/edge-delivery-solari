@@ -400,6 +400,7 @@ body.accessory-focus .default-content-wrapper p:first-child {
   margin: 0;
   height: 100vh;
   width: 50%;
+  position: relative;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -408,6 +409,7 @@ body.interior-focus .default-content-wrapper p:first-child img,
 body.accessory-focus .default-content-wrapper p:first-child img {
   height: 100vh;
   object-fit: cover;
+  position: absolute;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
