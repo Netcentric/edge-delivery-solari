@@ -227,23 +227,6 @@ main .section.highlight {
   line-height: 27px;
 }
 
-/* 
-.default-content-wrapper .blocks {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 80px;
-  gap: 107px;
-} 
-
-.default-content-wrapper .block:first-child {
-  flex-basis: 55%;
-}
-
-.default-content-wrapper .block:nth-child(2),
-.default-content-wrapper .block:nth-child(3) {
-  flex-basis: 30%;
-} */
-
 .default-content-wrapper .blocks {
   display: flex;
   flex-wrap: wrap;
@@ -301,46 +284,6 @@ main .section.highlight {
 .default-content-wrapper .block:nth-child(3) img {
   width: 100%;
 }
-
-/*
-.default-content-wrapper .block:nth-child(odd) h3 {
-  order: 1;
-  margin-bottom: 0;
-  margin-top: 24px;
-  font-size: var(--paragraph-font-size);
-}
-
-.default-content-wrapper .block:nth-child(odd) h3 + p {
-  order: 3;
-  margin-top: 0;
-  margin-left: 106px;
-}
-
-.default-content-wrapper .block:nth-child(odd) p:last-child {
-  order: 2;
-  margin-top: 10px;
-  width: 40%;
-}
-
-.default-content-wrapper .block:nth-child(even) h3 {
-  order: 2;
-  margin-bottom: 0;
-  margin-top: 24px;
-  font-size: var(--paragraph-font-size);
-}
-
-.default-content-wrapper .block:nth-child(even) h3 + p {
-  order: 1;
-  margin-top: 0;
-  width: 30%;
-  margin-right: 106px;
-}
-
-.default-content-wrapper .block:nth-child(even) p:last-child {
-  order: 3;
-  margin-top: 10px;
-  width: 60%;
-} */
 
 .default-content-wrapper .info-container {
   position: absolute;
@@ -401,8 +344,8 @@ body.accessory-focus .section {
 
 body.engine-focus .default-content-wrapper,
 body.interior-focus .default-content-wrapper,
-body.accessory-focus .default-content-wrapper { 
-  display: flex; 
+body.accessory-focus .default-content-wrapper {
+  display: flex;
   height: 100%;
   max-width: 100%;
   flex-direction: row-reverse;
