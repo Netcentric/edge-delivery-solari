@@ -36,7 +36,6 @@ function addShipSpecifications(specs) {
 
   if (specs.Range) {
     addSpeedInformation(specs.Range, infoContainer);
-    // Temp content as it is not received from document
     addSpeedInformation(specs['Number of Passengers'].replace('to', '–').replaceAll(' ', ''), infoContainer, 'passengers', true);
     addSpeedInformation(specs.Length, infoContainer);
   }
