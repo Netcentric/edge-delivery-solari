@@ -718,7 +718,7 @@ function decorateSpaceshipFocusPageH1() {
   if (spaceshipFocusPageH1Element) {
     const innerText = spaceshipFocusPageH1Element.textContent.trim();
     const arr = innerText.split(' ');
-    const result = `<span class="rotate">${arr.join(' </span><span class="rotate">')}</span>`;
+    const result = `<span class="indent">${arr.join(' </span><span class="indent">')}</span>`;
 
     spaceshipFocusPageH1Element.innerHTML = result;
   }

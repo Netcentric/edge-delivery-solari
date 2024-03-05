@@ -24,23 +24,21 @@ body.ship-focus .default-content-wrapper .main-group > h1:first-child {
   position: absolute;
   left: 30%;
   margin: 64px auto 0;
-  word-break: keep-all;
-  word-spacing: 9999px;
   text-align: left;
   font-size: 150px;
   color: var(--dark-blue);
   text-transform: uppercase;
-  transform: skew(40deg);
   line-height: 150px;
   width: 55%;
   text-shadow: 0 0 64px white;
 }
 
-body.ship-focus .default-content-wrapper .main-group > h1:first-child .rotate {
-  position: relative;
-  white-space: pre-wrap;
-  transform: skew(-40deg);
-  display: inline-block;
+body.ship-focus .default-content-wrapper .main-group > h1:first-child .indent:nth-child(2) {
+  padding-left: 10%;
+}
+
+body.ship-focus .default-content-wrapper .main-group > h1:first-child .indent:nth-child(3) {
+  padding-left: 20%;
 }
 
 body.ship-focus .default-content-wrapper .sub-group p,
