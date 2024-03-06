@@ -6,7 +6,6 @@ body.ship-focus .default-content-wrapper {
   max-width: 100%;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
 body.ship-focus .default-content-wrapper h1 + p {
   max-height: 100vh;
   display: block;
@@ -44,4 +43,48 @@ body.ship-focus .default-content-wrapper .main-group > h1:first-child .indent:nt
 body.ship-focus .default-content-wrapper .sub-group p,
 body.ship-focus .default-content-wrapper .block:last-child p:last-child {
   width: 80%;
+}
+
+body.ship-focus .default-content-wrapper .spec-container {
+  margin-top: 86px;
+}
+
+body.ship-focus .default-content-wrapper .spec-container h2 {
+  clear: both;
+}
+
+body.ship-focus .default-content-wrapper .spec-container table {
+  width: 100%;
+  margin-top: 37px;
+}
+
+body.ship-focus .default-content-wrapper .spec-container th {
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  text-align: left;
+}
+
+body.ship-focus .default-content-wrapper .spec-container td {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+body.ship-focus .default-content-wrapper .info-container {
+  position: absolute;
+  top: 550px;
+  right: 130px;
+}
+
+body.ship-focus .default-content-wrapper .info-container .info-number {
+  font-size: 50px;
+  line-height: 70px;
+  font-weight: 300;
+}
+
+body.ship-focus .default-content-wrapper .info-container .info-text {
+  font-size: 15px;
+  line-height: 24px;
+  padding-left: 5px;
 }

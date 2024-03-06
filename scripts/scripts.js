@@ -66,7 +66,7 @@ function addEngineSpecifications(specs) {
   <table>`;
   specContainer.innerHTML = content;
 
-  const parentElement = document.querySelector('body.engine-focus .default-content-wrapper');
+  const parentElement = document.querySelector('body .default-content-wrapper .sub-group');
   parentElement.appendChild(specContainer);
 }
 
