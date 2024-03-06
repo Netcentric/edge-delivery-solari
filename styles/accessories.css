@@ -57,6 +57,7 @@ body.accessory-focus .default-content-wrapper p:first-child {
   margin: 0;
   height: 100vh;
   width: 50%;
+  position: relative;
 }
 
 body.engine-focus .default-content-wrapper .sub-group h2 + p,
@@ -71,6 +72,7 @@ body.interior-focus .default-content-wrapper p:first-child img,
 body.accessory-focus .default-content-wrapper p:first-child img {
   height: 100vh;
   object-fit: cover;
+  position: absolute;
 }
 
 body.engine-focus .spec-container,
