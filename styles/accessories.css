@@ -1,0 +1,105 @@
+
+
+body.engine-focus .section,
+body.interior-focus .section,
+body.accessory-focus .section {
+  padding: 0;
+}
+
+body.engine-focus .default-content-wrapper,
+body.interior-focus .default-content-wrapper,
+body.accessory-focus .default-content-wrapper {
+  display: flex;
+  height: 100%;
+  max-width: 100%;
+  flex-direction: row-reverse;
+}
+
+body.engine-focus .default-content-wrapper h1,
+body.interior-focus .default-content-wrapper h1,
+body.accessory-focus .default-content-wrapper h1 {
+  font-size: var(--heading-font-size-l);
+}
+
+body.engine-focus .default-content-wrapper .group,
+body.interior-focus .default-content-wrapper .group,
+body.accessory-focus .default-content-wrapper .group {
+  font-size: var(--paragraph-font-size);
+  display: flex;
+  justify-content: space-between;
+  padding: 64px 102px 40px 56px;
+  width: 50%;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+body.engine-focus .default-content-wrapper .sub-group,
+body.interior-focus .default-content-wrapper .sub-group,
+body.accessory-focus .default-content-wrapper .sub-group {
+  font-size: var(--paragraph-font-size);
+  display: flex;
+  flex-direction: column;
+}
+
+body.engine-focus .default-content-wrapper .sub-group h2,
+body.interior-focus .default-content-wrapper .sub-group h2,
+body.accessory-focus .default-content-wrapper .sub-group h2 {
+  line-height: 26px;
+  margin: 0;
+  font-size: var(--paragraph-font-size);
+}
+
+body.engine-focus .default-content-wrapper p:first-child,
+body.interior-focus .default-content-wrapper p:first-child,
+body.accessory-focus .default-content-wrapper p:first-child {
+  margin: 0;
+  height: 100vh;
+  width: 50%;
+  position: relative;
+}
+
+body.engine-focus .default-content-wrapper .sub-group h2 + p,
+body.interior-focus .default-content-wrapper .sub-group h2 + p,
+body.accessory-focus .default-content-wrapper .sub-group h2 + p {
+  line-height: 27px;
+  margin-top: 30px;
+}
+
+body.engine-focus .default-content-wrapper p:first-child img,
+body.interior-focus .default-content-wrapper p:first-child img,
+body.accessory-focus .default-content-wrapper p:first-child img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+}
+
+body.engine-focus .spec-container,
+body.interior-focus .spec-container,
+body.accessory-focus .spec-container {
+  width: 100%;
+  margin-top: 30px;
+}
+
+body.engine-focus .spec-container table,
+body.interior-focus .spec-container table,
+body.accessory-focus .spec-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+body.engine-focus .spec-container table td,
+body.interior-focus .spec-container table td,
+body.accessory-focus .spec-container table td {
+  border-bottom: 1px solid #8F8F8F;
+  padding: 15px 20px;
+  width: 50%;
+}
+
+body.engine-focus .spec-container table tr td:first-child,
+body.interior-focus .spec-container table tr td:first-child,
+body.accessory-focus .spec-container table tr td:first-child {
+  font-weight: bold;
+}
