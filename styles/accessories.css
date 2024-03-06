@@ -33,6 +33,13 @@ body.accessory-focus .default-content-wrapper .group {
   box-sizing: border-box;
   max-height: 100vh;
   overflow-y: scroll;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+}
+
+body.engine-focus .default-content-wrapper .group::-webkit-scrollbar,
+body.interior-focus .default-content-wrapper .group::-webkit-scrollbar,
+body.accessory-focus .default-content-wrapper .group::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }
 
 body.engine-focus .default-content-wrapper .sub-group,
