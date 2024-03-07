@@ -58,9 +58,9 @@ body.accessory-focus .default-content-wrapper .sub-group h2 {
   font-size: var(--paragraph-font-size);
 }
 
-body.engine-focus .default-content-wrapper p:first-child,
-body.interior-focus .default-content-wrapper p:first-child,
-body.accessory-focus .default-content-wrapper p:first-child {
+body.engine-focus .default-content-wrapper > p:first-child,
+body.interior-focus .default-content-wrapper > p:first-child,
+body.accessory-focus .default-content-wrapper > p:first-child {
   margin: 0;
   height: 100vh;
   width: 50%;

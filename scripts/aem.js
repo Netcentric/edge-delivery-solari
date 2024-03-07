@@ -645,7 +645,7 @@ function decorateFocusPage(pageType) {
   const groupElement = document.createElement('div');
   const subGroupElement = document.createElement('div');
   const focusH2 = parentElement.querySelector('h2');
-  const description = parentElement.querySelector('h2 + p');
+  const description = parentElement.querySelector('p:last-child');
 
   if (focusH1) {
     focusH1.innerHTML = `Selected Spaceship: ${focusH1.textContent}`;
@@ -653,11 +653,22 @@ function decorateFocusPage(pageType) {
 
   groupElement.classList.add('group');
   subGroupElement.classList.add('sub-group');
-  groupElement.appendChild(focusH1);
-  subGroupElement.appendChild(focusH2);
-  subGroupElement.appendChild(description);
-  groupElement.appendChild(subGroupElement);
-  parentElement.appendChild(groupElement);
+
+  if (focusH1) {
+    groupElement.appendChild(focusH1);
+  }
+  if (focusH2) {
+    subGroupElement.appendChild(focusH2);
+  }
+  if (description) {
+    subGroupElement.appendChild(description);
+  }
+  if (subGroupElement) {
+    groupElement.appendChild(subGroupElement);
+  }
+  if (groupElement) {
+    parentElement.appendChild(groupElement);
+  }
 }
 
 function decorateGroups() {
