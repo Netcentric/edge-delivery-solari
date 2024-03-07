@@ -642,20 +642,27 @@ function decorateFocusPage(pageType) {
     return;
   }
 
+  const engineTitleWrapper = document.createElement('h2');
   const groupElement = document.createElement('div');
   const subGroupElement = document.createElement('div');
   const focusH2 = parentElement.querySelector('h2');
   const description = parentElement.querySelector('p:last-child');
 
-  if (focusH1) {
-    focusH1.innerHTML = `Selected Spaceship: ${focusH1.textContent}`;
-  }
-
   groupElement.classList.add('group');
   subGroupElement.classList.add('sub-group');
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const baseModelParam = urlParams.get('baseModel');
+
+  if (baseModelParam) {
+    engineTitleWrapper.innerHTML = `Selected Spaceship: ${baseModelParam}`;
+  }
+
   if (focusH1) {
-    groupElement.appendChild(focusH1);
+    groupElement.appendChild(engineTitleWrapper);
+  }
+  if (focusH1) {
+    subGroupElement.appendChild(focusH1);
   }
   if (focusH2) {
     subGroupElement.appendChild(focusH2);
@@ -663,12 +670,10 @@ function decorateFocusPage(pageType) {
   if (description) {
     subGroupElement.appendChild(description);
   }
-  if (subGroupElement) {
-    groupElement.appendChild(subGroupElement);
-  }
-  if (groupElement) {
-    parentElement.appendChild(groupElement);
-  }
+
+  groupElement.appendChild(subGroupElement);
+
+  parentElement.appendChild(groupElement);
 }
 
 function decorateGroups() {
