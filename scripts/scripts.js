@@ -75,6 +75,7 @@ async function prepareSpecification() {
   const isEngineFocus = !isShipFocus && isTemplate('engine-focus');
   const isConfigurationResult = !isShipFocus && !isEngineFocus && isTemplate('configuration-result');
   try {
+    const configurationsPromise = isConfigurationResult && fetch('/configurations.json');
     if (!isShipFocus && !isEngineFocus && !isConfigurationResult) {
       return;
     }
@@ -99,7 +100,7 @@ async function prepareSpecification() {
     if (isShipFocus || isConfigurationResult) {
       addShipSpecifications(specificationsObj);
     } else /* if (isEngineFocus) */ {
-      const specContainer = addEngineSpecifications(specificationsObj, parentElement);
+      const specContainer = addEngineSpecifications(specificationsObj);
       const parentElement = document.querySelector('body .default-content-wrapper .sub-group');
       parentElement.appendChild(specContainer);
     }
@@ -117,9 +118,23 @@ async function prepareSpecification() {
         }
       }
     }
-
     document.body.dataset.features = specification.features;
     document.body.dataset.specification = specification.specifications;
+
+    if (configurationsPromise) {
+      const configurationsResponse = await configurationsPromise;
+      if (!configurationsResponse.ok) {
+        return;
+      }
+      const configurations = await configurationsResponse.json();
+      const configuration = configurations.data.find(
+        (c) => c.configuration === window.location.pathname,
+      );
+      if (!configuration) {
+        return;
+      }
+      document.querySelector('[id^="hello-traveler"]').textContent = `Hello ${configuration.firstName}`;
+    }
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error('could not load specifications', e);
