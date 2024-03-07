@@ -50,7 +50,7 @@ function addShipSpecifications(specs) {
   <tr><td>${specs.Length.split(',')[0]}</td><td>${specs.Width.split(',')[0]}</td><td>${specs.Height.split(',')[0]}</td><td>${specs.Weight.split(',')[0]}</td></tr><table></div>`;
   specContainer.innerHTML = content;
 
-  const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');
+  const parentElement = document.querySelector('body .default-content-wrapper');
   parentElement.appendChild(specContainer);
 }
 
@@ -66,16 +66,16 @@ function addEngineSpecifications(specs) {
   <table>`;
   specContainer.innerHTML = content;
 
-  const parentElement = document.querySelector('body .default-content-wrapper .sub-group');
-  parentElement.appendChild(specContainer);
+  return specContainer;
 }
 
 async function prepareSpecification() {
   const isTemplate = (template) => document.body.classList.contains(template);
   const isShipFocus = isTemplate('ship-focus');
   const isEngineFocus = !isShipFocus && isTemplate('engine-focus');
+  const isConfigurationResult = !isShipFocus && !isEngineFocus && isTemplate('configuration-result');
   try {
-    if (!isShipFocus && !isEngineFocus) {
+    if (!isShipFocus && !isEngineFocus && !isConfigurationResult) {
       return;
     }
     const specificationPath = getMetadata('specifications');
@@ -88,17 +88,34 @@ async function prepareSpecification() {
       return;
     }
     const specifications = await specificationsResponse.json();
-    const specification = specifications.data.find((s) => s.path === specificationUrl.pathname);
+    const findSpecification = (path) => specifications.data.find((s) => s.path === path);
+    const specification = findSpecification(specificationUrl.pathname);
     if (!specification) {
       return;
     }
 
     const specificationsObj = JSON.parse(specification.specifications);
 
-    if (isShipFocus) {
+    if (isShipFocus || isConfigurationResult) {
       addShipSpecifications(specificationsObj);
     } else /* if (isEngineFocus) */ {
-      addEngineSpecifications(specificationsObj);
+      const specContainer = addEngineSpecifications(specificationsObj, parentElement);
+      const parentElement = document.querySelector('body .default-content-wrapper .sub-group');
+      parentElement.appendChild(specContainer);
+    }
+    if (isConfigurationResult) {
+      const engineSpecificationUrl = getMetadata('engine-specifications');
+      if (engineSpecificationUrl) {
+        const engineSpecification = findSpecification(new URL(engineSpecificationUrl).pathname);
+        document.body.dataset.engineSpecification = engineSpecification.specifications;
+        if (engineSpecification) {
+          const specContainer = addEngineSpecifications(
+            JSON.parse(engineSpecification.specifications),
+          );
+          const engineDescription = document.querySelector('#engine ~ p + p');
+          engineDescription.after(specContainer);
+        }
+      }
     }
 
     document.body.dataset.features = specification.features;
