@@ -30,7 +30,7 @@ function addSpeedInformation(info, containerElement, name, splitWords = false) {
   containerElement.appendChild(infoElement);
 }
 
-function addShipSpecifications(specs) {
+function addShipSpecifications(specs, addIntroduction) {
   const infoContainer = document.createElement('div');
   const titleElement = document.querySelector('h2');
 
@@ -45,9 +45,10 @@ function addShipSpecifications(specs) {
   const specContainer = document.createElement('div');
   specContainer.classList.add('spec-container');
 
-  const content = `<h2>SPECIFICATIONS</h2><div><p>Learn more about the ${document.querySelector('h1').textContent} and its technical specifications.</p></div>
+  const introduction = addIntroduction ? `<h2>SPECIFICATIONS</h2><div><p>Learn more about the ${document.querySelector('h1').textContent} and its technical specifications.</p></div>` : '';
+  const content = `${introduction}
   <table class="spec-table"><tr><th>length</th><th>width</th><th>height</th><th>weight</th></tr>
-  <tr><td>${specs.Length.split(',')[0]}</td><td>${specs.Width.split(',')[0]}</td><td>${specs.Height.split(',')[0]}</td><td>${specs.Weight.split(',')[0]}</td></tr><table></div>`;
+  <tr><td>${specs.Length.split(',')[0]}</td><td>${specs.Width.split(',')[0]}</td><td>${specs.Height.split(',')[0]}</td><td>${specs.Weight.split(',')[0]}</td></tr><table>`;
   specContainer.innerHTML = content;
 
   const parentElement = document.querySelector('body .default-content-wrapper');
@@ -98,7 +99,7 @@ async function prepareSpecification() {
     const specificationsObj = JSON.parse(specification.specifications);
 
     if (isShipFocus || isConfigurationResult) {
-      addShipSpecifications(specificationsObj);
+      addShipSpecifications(specificationsObj, !isConfigurationResult);
     } else /* if (isEngineFocus) */ {
       const specContainer = addEngineSpecifications(specificationsObj);
       const parentElement = document.querySelector('body .default-content-wrapper .sub-group');
