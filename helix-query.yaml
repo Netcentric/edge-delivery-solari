@@ -36,8 +36,8 @@ indices:
       description: 
         select: head > meta[property="og:description"]
         value: attribute(el, "content")
-      specification: 
-        select: head > meta[name="specification"]
+      specifications: 
+        select: head > meta[name="specifications"]
         value: attribute(el, "content")
       hull-finishes-names:
         select: head > meta[name^="hull-finish-image-"]
