@@ -36,8 +36,8 @@ indices:
       description: 
         select: head > meta[property="og:description"]
         value: attribute(el, "content")
-      specification: 
-        select: head > meta[name="specification"]
+      specifications: 
+        select: head > meta[name="specifications"]
         value: attribute(el, "content")
       hull-finishes-names:
         select: head > meta[name^="hull-finish-image-"]
@@ -45,6 +45,15 @@ indices:
       hull-finishes-images:
         select: head > meta[name^="hull-finish-image-"]
         values: attribute(el, "content")
+      feature-headlines:
+        select: h3
+        values: textContent(el)
+      feature-images:
+        select: h3 + p picture img
+        values: attribute(el, "src")
+      feature-descriptions:
+        select: h3 + p + p
+        values: textContent(el)
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
