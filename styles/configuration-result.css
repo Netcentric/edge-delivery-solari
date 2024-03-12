@@ -139,6 +139,7 @@ body.configuration-result .spec-container {
     display: block;
     background-color: transparent;
     padding: 0;
+    overflow: hidden;
   }
 
   body.configuration-result .hero > p {
