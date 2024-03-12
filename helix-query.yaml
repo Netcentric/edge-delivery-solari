@@ -45,6 +45,15 @@ indices:
       hull-finishes-images:
         select: head > meta[name^="hull-finish-image-"]
         values: attribute(el, "content")
+      first-feature-headline:
+        select: h3
+        value: textContent(el)
+      first-feature-image:
+        select: h3 + p picture source
+        value: attribute(el, "srcset")
+      first-feature-description:
+        select: h3 + p + p
+        value: textContent(el)
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
