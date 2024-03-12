@@ -2,12 +2,13 @@ import {
   sampleRUM,
   // loadHeader,
   // loadFooter,
+  addPageHeader,
   decorateButtons,
   decorateIcons,
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
-  decorateSpaceshipFocusPageH1,
+  decorateHeroH1,
   decorateGroups,
   waitForLCP,
   loadBlocks,
@@ -32,7 +33,7 @@ function addSpeedInformation(info, containerElement, name, splitWords = false) {
 
 function addShipSpecifications(specs, addIntroduction) {
   const infoContainer = document.createElement('div');
-  const titleElement = document.querySelector('h2');
+  const heroContainer = document.querySelector('.hero');
 
   if (specs.Range) {
     addSpeedInformation(specs.Range, infoContainer);
@@ -40,15 +41,31 @@ function addShipSpecifications(specs, addIntroduction) {
     addSpeedInformation(specs.Length, infoContainer);
   }
   infoContainer.classList.add('info-container');
-  titleElement.parentNode.insertBefore(infoContainer, titleElement);
+  heroContainer.append(infoContainer);
 
   const specContainer = document.createElement('div');
   specContainer.classList.add('spec-container');
 
   const introduction = addIntroduction ? `<h2>SPECIFICATIONS</h2><div><p>Learn more about the ${document.querySelector('h1').textContent} and its technical specifications.</p></div>` : '';
   const content = `${introduction}
-  <table class="spec-table"><tr><th>length</th><th>width</th><th>height</th><th>weight</th></tr>
-  <tr><td>${specs.Length.split(',')[0]}</td><td>${specs.Width.split(',')[0]}</td><td>${specs.Height.split(',')[0]}</td><td>${specs.Weight.split(',')[0]}</td></tr><table>`;
+  <div class="spec-table">
+    <div class="spec-item">
+      <div class="spec-title">Length</div>
+      <div class="spec-value">${specs.Length.split(',')[0]}</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-title">Width</div>
+      <div class="spec-value">${specs.Width.split(',')[0]}</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-title">Height</div>
+      <div class="spec-value">${specs.Height.split(',')[0]}</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-title">Weight</div>
+      <div class="spec-value">${specs.Weight.split(',')[0]}</div>
+    </div>
+  </div>`;
   specContainer.innerHTML = content;
 
   const parentElement = document.querySelector('body .default-content-wrapper');
@@ -57,7 +74,7 @@ function addShipSpecifications(specs, addIntroduction) {
 
 function addEngineSpecifications(specs) {
   const specContainer = document.createElement('div');
-  specContainer.classList.add('spec-container');
+  specContainer.classList.add('engine-spec-container');
 
   const content = `<table>
     <tr><td>Length</td><td>${specs.Length}</td></tr>
@@ -103,18 +120,24 @@ async function prepareSpecification() {
     } else /* if (isEngineFocus) */ {
       const specContainer = addEngineSpecifications(specificationsObj);
       const parentElement = document.querySelector('body .default-content-wrapper .sub-group');
+
       parentElement.appendChild(specContainer);
     }
+
     if (isConfigurationResult) {
       const engineSpecificationUrl = getMetadata('engine-specifications');
+
       if (engineSpecificationUrl) {
         const engineSpecification = findSpecification(new URL(engineSpecificationUrl).pathname);
+
         document.body.dataset.engineSpecification = engineSpecification.specifications;
+
         if (engineSpecification) {
           const specContainer = addEngineSpecifications(
             JSON.parse(engineSpecification.specifications),
           );
           const engineDescription = document.querySelector('#engine ~ p + p');
+
           engineDescription.after(specContainer);
         }
       }
@@ -174,16 +197,17 @@ function buildAutoBlocks(main) {
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
+  addPageHeader();
   decorateButtons(main);
   decorateIcons(main);
-  buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
   decorateGroups();
-  decorateSpaceshipFocusPageH1();
+  decorateHeroH1();
   decorateFocusPage('engine');
   decorateFocusPage('interior');
   decorateFocusPage('accessory');
+  buildAutoBlocks(main);
 }
 
 /**

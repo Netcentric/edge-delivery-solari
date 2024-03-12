@@ -1,5 +1,6 @@
-@import url('baseModel.css');
 @import url('accessories.css');
+@import url('base-model.css');
+@import url('configuration-result.css');
 
 :root {
   /* colors */
@@ -293,4 +294,67 @@ main .section.highlight {
   opacity: 0.9;
   padding: 10px 20px;
   margin-bottom: 20px;
+}
+
+/* Engine specs container: */
+.engine-spec-container {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.engine-spec-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.engine-spec-container table td {
+  border-bottom: 1px solid #8F8F8F;
+  padding: 15px 20px;
+  width: 50%;
+}
+
+.engine-spec-container table tr td:first-child {
+  font-weight: bold;
+}
+
+
+/* Specifications container: */
+.spec-container {
+  margin-top: 86px;
+}
+
+.spec-container .spec-table {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.spec-container .spec-item {
+  padding: 15px 0;
+}
+
+.spec-container .spec-title {
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  text-align: left;
+  text-transform: lowercase;
+}
+
+.spec-container .spec-value {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.spec-container h2 {
+  clear: both;
+}
+
+/* Specifications container tablet/desktop: */
+@media (width >= 600px) {
+  .spec-container .spec-table {
+    flex-direction: row;
+  }
 }

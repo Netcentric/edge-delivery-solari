@@ -672,66 +672,110 @@ function decorateFocusPage(pageType) {
 }
 
 function decorateGroups() {
-  const parentElement = document.querySelector('body.ship-focus .default-content-wrapper');
+  const parentElement = document.querySelector('body.ship-focus .default-content-wrapper, body.configuration-result .default-content-wrapper');
+
   if (!parentElement) {
     return;
   }
+
+  const isConfigurationResultPage = document.body.classList.contains('configuration-result');
   const groupContainer = document.createElement('div');
   const subcontainer = document.createElement('div');
-  let groupElement = document.createElement('div');
+  let currentComponentGroup = document.createElement('div');
   let isCard = false;
   let child = parentElement.firstChild;
+  let isPrevHeading = false;
+
   subcontainer.classList.add('blocks');
-  groupElement.classList.add('main-group');
+  currentComponentGroup.classList.add('hero');
 
   while (child) {
-    if (groupElement.children.length > 0) {
-      switch (child.nodeName) {
-        case 'H1':
-          groupContainer.appendChild(groupElement);
-          groupElement = document.createElement('div');
-          break;
-        case 'H2':
-          groupContainer.appendChild(groupElement);
-          groupElement = document.createElement('div');
-          groupElement.classList.add('sub-group');
-          break;
-        case 'H3':
-          if (!isCard) {
-            groupContainer.appendChild(groupElement);
-          } else {
-            subcontainer.appendChild(groupElement);
-          }
-          groupElement = document.createElement('div');
-          groupElement.classList.add('block');
-          isCard = true;
-          break;
-        default:
-          break;
+    if (currentComponentGroup.children.length > 0) {
+      if (!isPrevHeading) {
+        switch (child.nodeName) {
+          case 'H1':
+            groupContainer.appendChild(currentComponentGroup);
+            currentComponentGroup = document.createElement('div');
+            isPrevHeading = true;
+            break;
+          case 'H2':
+            groupContainer.appendChild(currentComponentGroup);
+            currentComponentGroup = document.createElement('div');
+            currentComponentGroup.classList.add('sub-group'); // Becomes sub-group
+            isPrevHeading = true;
+            break;
+          case 'H3':
+            if (isCard && !isConfigurationResultPage) {
+              subcontainer.appendChild(currentComponentGroup);
+            } else {
+              groupContainer.appendChild(currentComponentGroup);
+            }
+            currentComponentGroup = document.createElement('div');
+            currentComponentGroup.classList.add('block'); // Becomes block
+            isCard = true;
+            isPrevHeading = true;
+            break;
+          default:
+            isPrevHeading = false;
+            break;
+        }
+      } else {
+        isPrevHeading = false;
       }
-      groupElement.appendChild(child);
+      currentComponentGroup.appendChild(child);
     } else {
-      groupElement.appendChild(child);
+      currentComponentGroup.appendChild(child);
     }
     child = parentElement.firstChild;
 
+    if (isConfigurationResultPage && currentComponentGroup.children.length === 1 && child.nodeName === 'H2') {
+      currentComponentGroup.appendChild(child);
+      child = parentElement.firstChild;
+    }
+
     if (!child) {
-      subcontainer.appendChild(groupElement);
+      subcontainer.appendChild(currentComponentGroup);
       groupContainer.appendChild(subcontainer);
     }
   }
   parentElement.appendChild(groupContainer);
 }
 
-function decorateSpaceshipFocusPageH1() {
-  const spaceshipFocusPageH1Element = document.querySelector('body.ship-focus .default-content-wrapper .main-group h1');
+function decorateHeroH1() {
+  const parentElement = document.querySelector('body.ship-focus, body.configuration-result');
 
-  if (spaceshipFocusPageH1Element) {
-    const innerText = spaceshipFocusPageH1Element.textContent.trim();
-    const arr = innerText.split(' ');
-    const result = `<span class="indent">${arr.join(' </span><span class="indent">')}</span>`;
+  if (parentElement) {
+    const spaceshipFocusPageH1Element = parentElement.querySelector('.default-content-wrapper h1');
 
-    spaceshipFocusPageH1Element.innerHTML = result;
+    if (spaceshipFocusPageH1Element) {
+      const innerText = spaceshipFocusPageH1Element.textContent.trim();
+      const arr = innerText.split(' ');
+      const result = `<span class="indent">${arr.join(' </span><span class="indent">')}</span>`;
+
+      spaceshipFocusPageH1Element.innerHTML = result;
+    }
+  }
+}
+
+function addPageHeader() {
+  const isConfigurationResultPage = document.body.classList.contains('configuration-result');
+
+  if (isConfigurationResultPage) {
+    const headerElement = document.querySelector('header');
+
+    headerElement.innerHTML = `
+      <div class="wrapper">
+        <div>
+          <img src="/icons/logo.svg" alt="" />
+          <img src="/icons/wordmark-cognizant.svg" alt="" />
+        </div>
+        <div>
+          <span class="font-gellix font-semibold leading-5">
+            Solari Astrocraft
+          </span>
+        </div>
+      </div>
+    `;
   }
 }
 
@@ -793,7 +837,8 @@ export {
   decorateIcons,
   decorateSections,
   decorateTemplateAndTheme,
-  decorateSpaceshipFocusPageH1,
+  decorateHeroH1,
+  addPageHeader,
   decorateGroups,
   decorateFocusPage,
   fetchPlaceholders,

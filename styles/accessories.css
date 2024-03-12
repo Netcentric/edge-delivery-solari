@@ -82,31 +82,3 @@ body.accessory-focus .default-content-wrapper p:first-child img {
   object-fit: cover;
   position: absolute;
 }
-
-body.engine-focus .spec-container,
-body.interior-focus .spec-container,
-body.accessory-focus .spec-container {
-  width: 100%;
-  margin-top: 30px;
-}
-
-body.engine-focus .spec-container table,
-body.interior-focus .spec-container table,
-body.accessory-focus .spec-container table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-body.engine-focus .spec-container table td,
-body.interior-focus .spec-container table td,
-body.accessory-focus .spec-container table td {
-  border-bottom: 1px solid #8F8F8F;
-  padding: 15px 20px;
-  width: 50%;
-}
-
-body.engine-focus .spec-container table tr td:first-child,
-body.interior-focus .spec-container table tr td:first-child,
-body.accessory-focus .spec-container table tr td:first-child {
-  font-weight: bold;
-}
