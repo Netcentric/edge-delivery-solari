@@ -262,6 +262,10 @@ body.configuration-result .spec-container {
   body.configuration-result .blocks h2 {
     font-size: 38px;
   }
+
+  body.configuration-result .sub-group {
+    margin: 20px 0;
+  }
 }
 
 /*
