@@ -49,8 +49,8 @@ indices:
         select: h3
         values: textContent(el)
       feature-images:
-        select: h3 + p picture source:fist-child
-        values: el
+        select: h3 + p picture img
+        values: attribute(el, "src")
       feature-descriptions:
         select: h3 + p + p
         values: textContent(el)
