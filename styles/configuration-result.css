@@ -126,6 +126,35 @@ body.configuration-result .spec-container {
   margin: 20px 15px;
 }
 
+/* Engine Specs */
+body.configuration-result .engine-spec-container {}
+
+body.configuration-result .engine-spec-container table {}
+
+body.configuration-result .engine-spec-container table tr {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+body.configuration-result .engine-spec-container table td {
+  display: block;
+  border: 0;
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+
+body.configuration-result .engine-spec-container table tr td:first-child {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+body.configuration-result .engine-spec-container table tr td:last-child {
+  font-size: 22px;
+  font-weight: 600;
+}
+
 @media (width >= 600px) {
   body.configuration-result .section > div {
     padding: 0 32px;
@@ -270,6 +299,16 @@ body.configuration-result .spec-container {
 
   body.configuration-result .sub-group {
     margin: 20px 0;
+  }
+
+  /* Engine Specs */
+  /* stylelint-disable-next-line no-descending-specificity */
+  body.configuration-result .engine-spec-container {
+    margin-top: 0;
+  }
+
+  body.configuration-result .engine-spec-container table tr td:last-child {
+    font-size: 24px;
   }
 }
 
