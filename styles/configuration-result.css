@@ -127,6 +127,10 @@ body.configuration-result .spec-container {
 }
 
 @media (width >= 600px) {
+  body.configuration-result .section > div {
+    padding: 0 32px;
+  }
+
   body.configuration-result header .wrapper {
     height: 70px;
   }
