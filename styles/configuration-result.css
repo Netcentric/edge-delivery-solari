@@ -244,6 +244,10 @@ body.configuration-result .engine-spec-container table tr td:last-child {
     margin: 40px 0;
   }
 
+  body.configuration-result .default-content-wrapper > div .block img {
+    width: 100%;
+  }
+
   /* top left */
   body.configuration-result .default-content-wrapper > div > :nth-child(4n+1 of .block) {
     clear: both;
