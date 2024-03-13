@@ -283,7 +283,7 @@ main .section.highlight {
 }
 
 .spec-container .spec-value {
-  font-size: 20px;
+  font-size: 22px;
   line-height: 26px;
   font-weight: 600;
 }
@@ -296,5 +296,12 @@ main .section.highlight {
 @media (width >= 600px) {
   .spec-container .spec-table {
     flex-direction: row;
+  }
+}
+
+/* Specifications container desktop: */
+@media (width >= 900px) {
+  .spec-container .spec-value {
+    font-size: 26px;
   }
 }
