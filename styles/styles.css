@@ -229,66 +229,6 @@ main .section.highlight {
   margin-top: 60px;
 }
 
-.default-content-wrapper .sub-group p {
-  line-height: 27px;
-}
-
-.default-content-wrapper .blocks {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 80px;
-  justify-content: space-between;
-}
-
-.default-content-wrapper .block {
-  display: flex;
-  flex-flow: column wrap;
-  font-size: var(--paragraph-font-size);
-  line-height: 27px;
-  overflow: hidden;
-  place-content: stretch;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-
-.default-content-wrapper .block:nth-child(1) {
-  flex-basis: 55%;
-}
-
-.default-content-wrapper .block:nth-child(2) {
-  flex-basis: 35%;
-}
-
-.default-content-wrapper .block:nth-child(3) {
-  flex-basis: 100%;
-  margin-top: 42px;
-}
-
-.default-content-wrapper .block h3 {
-  order: 2;
-  margin-bottom: 0;
-  margin-top: 24px;
-  font-size: var(--paragraph-font-size);
-}
-
-.default-content-wrapper .block h3 + p {
-  order: 1;
-  margin: 0;
-}
-
-.default-content-wrapper .block p:last-child {
-  order: 3;
-  margin-top: 10px;
-}
-
-.default-content-wrapper .block:nth-child(3) h3 + p {
-  width: 100%;
-}
-
-.default-content-wrapper .block:nth-child(3) img {
-  width: 100%;
-}
-
 .default-content-wrapper .info {
   background-color: var(--background-color);
   opacity: 0.9;
