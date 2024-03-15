@@ -51,19 +51,19 @@ function addShipSpecifications(specs, addIntroduction) {
   <div class="spec-table">
     <div class="spec-item">
       <div class="spec-title">Length</div>
-      <div class="spec-value">${specs.Length.split(',')[0]}</div>
+      <div class="spec-value">${specs.Length}</div>
     </div>
     <div class="spec-item">
       <div class="spec-title">Width</div>
-      <div class="spec-value">${specs.Width.split(',')[0]}</div>
+      <div class="spec-value">${specs.Width}</div>
     </div>
     <div class="spec-item">
       <div class="spec-title">Height</div>
-      <div class="spec-value">${specs.Height.split(',')[0]}</div>
+      <div class="spec-value">${specs.Height}</div>
     </div>
     <div class="spec-item">
       <div class="spec-title">Weight</div>
-      <div class="spec-value">${specs.Weight.split(',')[0]}</div>
+      <div class="spec-value">${specs.Weight}</div>
     </div>
   </div>`;
   specContainer.innerHTML = content;
