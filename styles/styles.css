@@ -296,6 +296,7 @@ main .section.highlight {
 @media (width >= 600px) {
   .spec-container .spec-table {
     flex-direction: row;
+    gap: 20px;
   }
 }
 
