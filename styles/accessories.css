@@ -88,3 +88,7 @@ body.accessory-focus .default-content-wrapper p:first-child img {
   object-fit: cover;
   position: absolute;
 }
+
+body.engine-focus .default-content-wrapper p:first-child img {
+  object-position: left center;
+}
