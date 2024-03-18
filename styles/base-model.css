@@ -127,7 +127,10 @@ body.ship-focus .default-content-wrapper .block:nth-child(3) h3 {
 
 body.ship-focus .default-content-wrapper .block :nth-child(2) {
   grid-area: img;
-  padding-left: 50px;
+}
+
+body.ship-focus .default-content-wrapper .block :nth-child(2) img {
+  width: 80%;
 }
 
 body.ship-focus .default-content-wrapper .block :nth-child(3) {
