@@ -770,10 +770,10 @@ function addPageHeader() {
 
     headerElement.innerHTML = `
       <div class="wrapper">
-        <div>
+        <a href="https://astrocraft.innovationlab.cx/">
           <img src="/icons/logo.svg" alt="" />
           <img src="/icons/wordmark-cognizant.svg" alt="" />
-        </div>
+        </a>
         <div>
           <span class="font-gellix font-semibold leading-5">
             Solari Astrocraft
