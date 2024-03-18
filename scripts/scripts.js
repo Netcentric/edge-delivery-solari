@@ -3,6 +3,7 @@ import {
   // loadHeader,
   // loadFooter,
   addPageHeader,
+  addRestartJourneyLink,
   decorateButtons,
   decorateIcons,
   decorateSections,
@@ -68,7 +69,7 @@ function addShipSpecifications(specs, addIntroduction) {
   </div>`;
   specContainer.innerHTML = content;
 
-  const parentElement = document.querySelector('body .default-content-wrapper');
+  const parentElement = document.querySelector('body .default-content-wrapper > div');
   parentElement.appendChild(specContainer);
 }
 
@@ -208,6 +209,7 @@ export function decorateMain(main) {
   decorateFocusPage('interior');
   decorateFocusPage('accessory');
   buildAutoBlocks(main);
+  addRestartJourneyLink();
 }
 
 /**

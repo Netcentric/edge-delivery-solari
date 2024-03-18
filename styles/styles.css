@@ -4,7 +4,7 @@
 
 :root {
   /* colors */
-  --link-color: #035fe6;
+  --link-color: #11C7CC;
   --link-hover-color: #136ff6;
   --background-color: white;
   --light-color: #eee;
@@ -146,8 +146,8 @@ a.button:any-link, button {
   font-style: normal;
   font-weight: 600;
   cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
+  color: #000048;
+  background-color: #11C7CC;
   margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
@@ -156,7 +156,7 @@ a.button:any-link, button {
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus  {
-  background-color: var(--link-hover-color);
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -169,6 +169,23 @@ a.button.secondary, button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color)
+}
+
+
+.button.icon-arrow-right::after  {
+  content: '';
+  background: url('/icons/arrow-right-bold.svg');
+  fill: inherit;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: -3px;
+  margin-right: -7px;
+}
+
+.float-right {
+  float: right;
 }
 
 main img {

@@ -784,6 +784,25 @@ function addPageHeader() {
   }
 }
 
+function addRestartJourneyLink() {
+  const isConfigurationResultPage = document.body.classList.contains('configuration-result');
+
+  if (isConfigurationResultPage) {
+    const containerElement = document.querySelector('main .default-content-wrapper');
+    const restartJourneyLink = document.createElement('a');
+
+    restartJourneyLink.classList.add('button');
+    restartJourneyLink.classList.add('float-right');
+    restartJourneyLink.classList.add('icon-arrow-right');
+    restartJourneyLink.setAttribute('href', 'https://astrocraft.innovationlab.cx');
+    restartJourneyLink.innerHTML = 'Start a new configuration';
+
+    if (containerElement) {
+      containerElement.append(restartJourneyLink);
+    }
+  }
+}
+
 /**
  * Loads a block named 'header' into header
  * @param {Element} header header element
@@ -844,6 +863,7 @@ export {
   decorateTemplateAndTheme,
   decorateHeroH1,
   addPageHeader,
+  addRestartJourneyLink,
   decorateGroups,
   decorateFocusPage,
   fetchPlaceholders,
