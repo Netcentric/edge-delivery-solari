@@ -1,5 +1,5 @@
-body.configuration-result {
-  padding-bottom: 40px;
+body.configuration-result .default-content-wrapper {
+  padding-bottom: 160px;
 }
 
 body.configuration-result header {
