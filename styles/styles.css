@@ -148,7 +148,7 @@ a.button:any-link, button {
   cursor: pointer;
   color: #000048;
   background-color: #11C7CC;
-  margin: 16px 0;
+  margin: 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

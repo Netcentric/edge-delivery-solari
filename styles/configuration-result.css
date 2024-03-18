@@ -1,5 +1,5 @@
-body.configuration-result .default-content-wrapper {
-  padding-bottom: 160px;
+body.configuration-result .section > div {
+  padding-bottom: 100px;
 }
 
 body.configuration-result header {
@@ -162,7 +162,7 @@ body.configuration-result .engine-spec-container table tr td:last-child {
 
 @media (width >= 600px) {
   body.configuration-result .section > div {
-    padding: 0 32px;
+    padding: 0 32px 160px;
   }
 
   body.configuration-result h2 {
