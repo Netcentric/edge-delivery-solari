@@ -117,8 +117,8 @@ body.ship-focus .default-content-wrapper .block:nth-child(3) {
   margin-top: 42px;
   display: grid;
   grid-template:
-    'title img' min-content
-    'text img' 1fr / 33% 66%;
+    'title . img' min-content
+    'text . img' 1fr / 30% 10% 60%;
 }
 
 body.ship-focus .default-content-wrapper .block:nth-child(3) h3 {
