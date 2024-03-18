@@ -94,7 +94,7 @@ async function prepareSpecification() {
   const isEngineFocus = !isShipFocus && isTemplate('engine-focus');
   const isConfigurationResult = !isShipFocus && !isEngineFocus && isTemplate('configuration-result');
   try {
-    const configurationsPromise = isConfigurationResult && fetch('/configurations.json', {
+    const configurationsPromise = isConfigurationResult && fetch('https://main--edge-delivery-solari--netcentric.hlx.page/configurations.json', {
       headers: {
         'Cache-Control': 'no-cache',
       },
