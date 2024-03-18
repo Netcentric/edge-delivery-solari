@@ -67,6 +67,7 @@ body.configuration-result .hero h1 {
   font-size: 35px;
   text-transform: uppercase;
   width: 25%;
+  text-shadow: 0 0 64px black;
 }
 
 body.configuration-result .hero h2 {
