@@ -563,10 +563,9 @@ function buildBlock(blockName, content) {
  * @param {Element} block The block element
  */
 async function loadBlock(block) {
-  const status = block.dataset.blockStatus;
-  if (status !== 'loading' && status !== 'loaded') {
+  const { blockName, status } = block.dataset;
+  if (blockName && status !== 'loading' && status !== 'loaded') {
     block.dataset.blockStatus = 'loading';
-    const { blockName } = block.dataset;
     try {
       const cssLoaded = loadCSS(`${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`);
       const decorationComplete = new Promise((resolve) => {
