@@ -4,8 +4,6 @@
 
 :root {
   /* colors */
-  --link-color: #11C7CC;
-  --link-hover-color: #136ff6;
   --background-color: white;
   --light-color: #eee;
   --dark-color: #ccc;
@@ -13,6 +11,8 @@
   --midnight-blue-color: #000048;
   --dark-blue: #2F78C4;
   --dark-teal: #11C7CC;
+  --link-color: var(--dark-blue);
+  --link-hover-color: #136ff6;
 
 
   /* fonts */
