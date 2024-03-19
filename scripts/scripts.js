@@ -138,9 +138,11 @@ async function prepareSpecification() {
           const specContainer = addEngineSpecifications(
             JSON.parse(engineSpecification.specifications),
           );
-          const engineDescription = document.querySelector('#engine ~ p + p');
+          const engineDescription = document.querySelector('.default-content-wrapper > div > :nth-child(2 of .sub-group)');
 
-          engineDescription.after(specContainer);
+          if (engineDescription) {
+            engineDescription.append(specContainer);
+          }
         }
       }
     }
