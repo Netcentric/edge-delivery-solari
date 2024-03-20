@@ -283,7 +283,8 @@ body.configuration-result .engine-spec-container table tr td:last-child {
     clear: both;
   }
 
-  body.configuration-result .default-content-wrapper > div > .sub-group ~ :nth-child(4n+3 of .block).last {
+  body.configuration-result .default-content-wrapper > div > .sub-group ~ :nth-child(4n+1 of .block).last,
+    body.configuration-result .default-content-wrapper > div > .sub-group ~ :nth-child(4n+3 of .block).last {
     width: 100%;
   }
 
