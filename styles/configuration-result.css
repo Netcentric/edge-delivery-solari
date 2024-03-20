@@ -279,7 +279,12 @@ body.configuration-result .engine-spec-container table tr td:last-child {
   /* bottom left */
   body.configuration-result .default-content-wrapper > div > :nth-child(4n+3 of .block) {
     float: left;
-    width: 30%; clear: both;
+    width: 30%;
+    clear: both;
+  }
+
+  body.configuration-result .default-content-wrapper > div > .sub-group ~ :nth-child(4n+3 of .block).last {
+    width: 100%;
   }
 
   /* bottom right */

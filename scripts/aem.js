@@ -742,6 +742,13 @@ function decorateGroups() {
       groupContainer.appendChild(subcontainer);
     }
   }
+
+  if (isConfigurationResultPage) {
+    const lastGroup = groupContainer.querySelector('div :nth-last-child(1 of .block)');
+
+    lastGroup.classList.add('last');
+  }
+
   parentElement.appendChild(groupContainer);
 }
 
