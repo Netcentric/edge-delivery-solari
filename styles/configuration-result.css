@@ -259,10 +259,6 @@ body.configuration-result .engine-spec-container table tr td:last-child {
     margin-top: 35px;
   }
 
-  body.configuration-result .blocks .sub-group img {
-    margin-top: 30px;
-  }
-
   /* top left */
   body.configuration-result .default-content-wrapper > div > :nth-child(4n+1 of .block) {
     clear: both;
