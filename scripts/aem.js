@@ -746,7 +746,9 @@ function decorateGroups() {
   if (isConfigurationResultPage) {
     const lastGroup = groupContainer.querySelector('div :nth-last-child(1 of .block)');
 
-    lastGroup.classList.add('last');
+    if (lastGroup) {
+      lastGroup.classList.add('last');
+    }
   }
 
   parentElement.appendChild(groupContainer);
